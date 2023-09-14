@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
+
 html {
   font-size: 14px;
 }
@@ -23,6 +24,7 @@ body {
 /* Nav */
 
 .navbar{
+    background-color:#457EAC !important;
     padding-left: 2rem;
     padding-right: 2rem;
 }
@@ -46,4 +48,41 @@ body {
 .navbar-dark .navbar-toggler {
     color: white;
     border-color: white;
+}
+
+/*  Home - Learn    */
+
+#replacing-books-square {
+    background-color: #DD88C2;
+}
+
+#identifying-areas-square {
+    background-color: #457EAC;
+}
+
+#find-callnums-square {
+    background-color: #659157;
+}
+
+
+.learn-cards{
+    padding:3rem 2rem;
+}
+
+
+.selection-row{
+    margin:5rem 1rem;
+}
+
+.square-img {
+    width: 150px;
+    height: 150px;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+.coming-soon{
+    color:#457EAC;
+    margin-top: 4rem;
+    text-align:center;
 }

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Learn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center selection-row">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 ">
+        <div class="col">
+            <a asp-controller="Home" asp-action="Learn" style="text-decoration: none;">
+                <div class="card h-100 learn-cards" id="replacing-books-square">
+                    <img src="~/images/book.png" class="card-img-top square-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="text-white square-text">Replacing Books</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Home" asp-action="ComingSoon" style="text-decoration: none;">
+                <div class="card h-100 learn-cards" id="identifying-areas-square">
+                    <img src="~/images/search.png" class="card-img-top square-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="text-white square-text">Identifying Areas</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Home" asp-action="ComingSoon" style="text-decoration: none;">
+                <div class="card h-100 learn-cards" id="find-callnums-square">
+                    <img src="~/images/lamp.png" class="card-img-top square-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="text-white square-text">
+                            Finding Call
+                            Numbers
+                        </h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
