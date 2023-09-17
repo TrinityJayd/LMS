@@ -8,15 +8,20 @@ namespace LMS_Management.ReplacingBooks
 {
     public class ReplacingBooks
     {
-        private string[] callNumbers = new string[10];
+        private List<string> callNumbers = new List<string>();
 
         //generate 10 random dewey decimal system call numbers 
-        public string[] GenerateCallNumbers()
+        public List<string> GenerateCallNumbers()
         {
             Random random = new Random();
             for (int i = 0; i < 10; i++)
             {
-                callNumbers[i] = random.Next(1, 1000).ToString() + "." + random.Next(1, 100).ToString();
+                string firstThreeDigits = random.Next(1, 1000).ToString();                  
+                firstThreeDigits = AddZeros(firstThreeDigits);
+
+                string digitsAfterPeriod = random.Next(1, 1000).ToString();
+
+                callNumbers.Add(firstThreeDigits + "." + digitsAfterPeriod);
 
             }
             return callNumbers;
@@ -25,11 +30,11 @@ namespace LMS_Management.ReplacingBooks
 
 
         //sort the call numbers in ascending order using a sorting algorithm
-        public string[] SortCallNumbers()
+        public List<string> SortCallNumbers()
         {
-            for (int i = 0; i < callNumbers.Length; i++)
+            for (int i = 0; i < callNumbers.Count; i++)
             {
-                for (int j = i + 1; j < callNumbers.Length; j++)
+                for (int j = i + 1; j < callNumbers.Count; j++)
                 {
                     // Parse the call numbers into numeric values
                     double number1 = double.Parse(callNumbers[i]);
@@ -49,9 +54,9 @@ namespace LMS_Management.ReplacingBooks
 
 
         //recieve the list from the user and check if the order is correct
-        public bool CheckOrder(string[] callNumbers)
+        public bool CheckOrder(List<string> callNumbers)
         {
-            for (int i = 0; i < callNumbers.Length; i++)
+            for (int i = 0; i < callNumbers.Count; i++)
             {
                 if (callNumbers[i] != this.callNumbers[i])
                 {
@@ -59,6 +64,37 @@ namespace LMS_Management.ReplacingBooks
                 }
             }
             return true;
+        }
+
+        public static string AddZeros(string text)
+        {
+            if(text.Length == 1)
+            {
+                text = "00" + text;
+            }
+            else if(text.Length == 2)
+            {
+                text = "0" + text;
+            }   
+
+            return text;
+        }
+
+        //generate 3 random alphabetic letters
+        public static string GenerateLetters()
+        {
+            Random random = new Random();
+
+            string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            string randomLetters = "";
+
+            for (int i = 0; i < 3; i++)
+            {
+                randomLetters += letters[random.Next(0, letters.Length)];
+            }
+
+            return randomLetters;
         }
 
     }

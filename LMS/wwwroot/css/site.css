@@ -86,3 +86,31 @@ body {
     margin-top: 4rem;
     text-align:center;
 }
+
+/*  Replace The Books    */
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex; /* Display list items horizontally */
+}
+
+.book-boxes {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-right: 5px; /* Add margin between items */
+    background-color: #fff;
+    cursor: pointer;
+}
+
+    .book-boxes:last-child {
+        margin-right: 0; /* Remove margin from the last item */
+    }
+
+    .book-boxes:hover {
+        background-color: #f2f2f2;
+    }
+
+.dragging {
+    opacity: 0.5;
+}

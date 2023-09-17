@@ -1,0 +1,61 @@
+﻿@model IEnumerable<string>
+        
+<body>
+    <h1>Sort The Call Numbers In Ascending Order</h1>
+    <ul id="sortable-list">
+        @foreach (var item in ViewBag.Items)
+        {
+            <li class="book-boxes" draggable="true">@item</li>
+        }
+    </ul>
+    
+    <script>
+        const list = document.getElementById('sortable-list');
+
+        let draggingElement = null;
+
+        list.addEventListener('dragstart', (e) => {
+            draggingElement = e.target;
+            e.dataTransfer.setData('text/plain', e.target.textContent);
+            e.target.classList.add('dragging');
+        });
+
+        list.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            // Allow items to be dropped between other items
+            if (e.target.tagName === 'LI') {
+                e.target.classList.add('over');
+            }
+        });
+
+        list.addEventListener('dragenter', (e) => {
+            if (e.target.tagName === 'LI') {
+                e.target.classList.add('over');
+            }
+        });
+
+        list.addEventListener('dragleave', (e) => {
+            if (e.target.tagName === 'LI') {
+                e.target.classList.remove('over');
+            }
+        });
+
+        list.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (e.target.tagName === 'LI') {
+                e.target.classList.remove('over');
+                const droppedText = e.dataTransfer.getData('text/plain');
+
+                // Determine the position of the drop target
+                const dropTargetIndex = Array.from(list.children).indexOf(e.target);
+
+                // Insert the dragged item before the drop target
+                list.insertBefore(draggingElement, list.children[dropTargetIndex]);
+            }
+        });
+
+        list.addEventListener('dragend', (e) => {
+            e.target.classList.remove('dragging');
+        });
+    </script>
+</body>
