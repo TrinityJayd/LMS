@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<string>
-        
+
 <body>
     <h1>Sort The Call Numbers In Ascending Order</h1>
     <ul id="sortable-list">
@@ -8,7 +8,9 @@
             <li class="book-boxes" draggable="true">@item</li>
         }
     </ul>
-    
+
+    <button id="submit-button">Check</button>
+
     <script>
         const list = document.getElementById('sortable-list');
 
@@ -57,5 +59,39 @@
         list.addEventListener('dragend', (e) => {
             e.target.classList.remove('dragging');
         });
+
+        const submitButton = document.getElementById('submit-button');
+
+        // Attach the handleSubmit function to the submit button's click event
+        submitButton.addEventListener('click', handleSubmit);
+
+        // Define the handleSubmit function
+        function handleSubmit() {
+            // Get the sorted order of the items
+            const sortedItems = Array.from(list.children).map(li => li.textContent);
+
+            console.log('Data to send:', sortedItems);
+
+            // Send the sortedItems to the server using a POST request
+            fetch('/ReplaceBooks/SubmitSortedItems', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(sortedItems), // Send the array directly, not as an object
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle success, you can show a message to the user if needed
+                        console.log('Sorted items submitted successfully');
+                    } else {
+                        // Handle error, you can show an error message to the user if needed
+                        console.error('Error submitting sorted items');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
     </script>
 </body>

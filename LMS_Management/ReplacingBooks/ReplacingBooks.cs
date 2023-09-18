@@ -54,11 +54,13 @@ namespace LMS_Management.ReplacingBooks
 
 
         //recieve the list from the user and check if the order is correct
-        public bool CheckOrder(List<string> callNumbers)
+        public bool CheckOrder(List<string> userCallNumbers)
         {
+            callNumbers = SortCallNumbers();
+
             for (int i = 0; i < callNumbers.Count; i++)
             {
-                if (callNumbers[i] != this.callNumbers[i])
+                if (userCallNumbers[i] != callNumbers[i])
                 {
                     return false;
                 }
