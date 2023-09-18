@@ -99,5 +99,18 @@ namespace LMS_Management.ReplacingBooks
             return randomLetters;
         }
 
+        public List<string> GameLevelDescription()
+        {
+            List<string> levels = new List<string>()
+            {
+                ("Beginner: Sort numbers without a timer."),
+                ("Intermediate: Sort numbers within 45 seconds."),
+                ("Challenger: Sort numbers and letters within 45 seconds."),
+                ("Expert: Master sorting numbers and letters within 30 seconds.")
+            };
+
+            return levels;
+        }
+
     }
 }

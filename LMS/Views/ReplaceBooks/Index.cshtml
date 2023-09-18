@@ -1,19 +1,31 @@
-﻿@model IEnumerable<string>
-
-<body>
-    <h1>Sort The Call Numbers In Ascending Order</h1>
+﻿<body style="text-align:center;">
+    <h1 class="page-headings">Sort The Call Numbers In Ascending Order</h1>
     <ul id="sortable-list">
+        @{
+            // Define an array of colors
+            string[] colors = { "#FF5733", "#33FF57", "#5733FF", "#FF33A3", "#33A3FF", "#FFFF33", "#33FFFF", "#333333", "#777777", "#AAAAAA" };
+        }
+
         @foreach (var item in ViewBag.Items)
         {
-            <li class="book-boxes" draggable="true">@item</li>
+            // Generate a random index to select a color
+            int randomIndex = new Random().Next(0, colors.Length);
+            string randomColor = colors[randomIndex];
+
+            <li class="book-boxes" draggable="true" style="background-color: @randomColor;">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">@item</p>
+                    </div>
+                </div>
+            </li>
         }
     </ul>
 
-    <button id="submit-button">Check</button>
+    <button id="check-submit-button">Check</button>
 
     <script>
         const list = document.getElementById('sortable-list');
-
         let draggingElement = null;
 
         list.addEventListener('dragstart', (e) => {
@@ -24,35 +36,51 @@
 
         list.addEventListener('dragover', (e) => {
             e.preventDefault();
-            // Allow items to be dropped between other items
-            if (e.target.tagName === 'LI') {
-                e.target.classList.add('over');
-            }
-        });
+            const target = e.target;
+            const listItem = target.closest('li');
 
-        list.addEventListener('dragenter', (e) => {
-            if (e.target.tagName === 'LI') {
-                e.target.classList.add('over');
+            if (listItem) {
+                const boundingBox = listItem.getBoundingClientRect();
+                const mouseY = e.clientY;
+
+                // Determine the position to insert the dragged item
+                const insertBefore = mouseY < boundingBox.top + boundingBox.height / 2;
+
+                // Remove the over class from all items
+                list.querySelectorAll('li').forEach((li) => {
+                    li.classList.remove('over');
+                });
+
+                if (insertBefore) {
+                    listItem.classList.add('over-top-half');
+                } else {
+                    listItem.classList.add('over-bottom-half');
+                }
             }
         });
 
         list.addEventListener('dragleave', (e) => {
-            if (e.target.tagName === 'LI') {
-                e.target.classList.remove('over');
+            e.preventDefault();
+            const listItem = e.target.closest('li');
+
+            if (listItem) {
+                listItem.classList.remove('over-top-half', 'over-bottom-half');
             }
         });
 
         list.addEventListener('drop', (e) => {
             e.preventDefault();
-            if (e.target.tagName === 'LI') {
-                e.target.classList.remove('over');
-                const droppedText = e.dataTransfer.getData('text/plain');
 
-                // Determine the position of the drop target
+            if (e.target.tagName === 'LI') {
+                e.target.classList.remove('over-top-half', 'over-bottom-half');
                 const dropTargetIndex = Array.from(list.children).indexOf(e.target);
 
-                // Insert the dragged item before the drop target
-                list.insertBefore(draggingElement, list.children[dropTargetIndex]);
+                // Insert the dragged item before or after the drop target
+                if (e.target.classList.contains('over-bottom-half')) {
+                    list.insertBefore(draggingElement, list.children[dropTargetIndex + 1]);
+                } else {
+                    list.insertBefore(draggingElement, list.children[dropTargetIndex]);
+                }
             }
         });
 
@@ -60,7 +88,7 @@
             e.target.classList.remove('dragging');
         });
 
-        const submitButton = document.getElementById('submit-button');
+        const submitButton = document.getElementById('check-submit-button');
 
         // Attach the handleSubmit function to the submit button's click event
         submitButton.addEventListener('click', handleSubmit);
