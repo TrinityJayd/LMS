@@ -36,52 +36,34 @@
 
         list.addEventListener('dragover', (e) => {
             e.preventDefault();
-            const target = e.target;
-            const listItem = target.closest('li');
+        });
 
-            if (listItem) {
-                const boundingBox = listItem.getBoundingClientRect();
+        list.addEventListener('dragenter', (e) => {
+            const listItem = e.target.closest('li');
+
+            if (listItem && listItem !== draggingElement) {
                 const mouseY = e.clientY;
+                const boundingBox = listItem.getBoundingClientRect();
+                const halfwayPoint = boundingBox.top + boundingBox.height / 2;
 
                 // Determine the position to insert the dragged item
-                const insertBefore = mouseY < boundingBox.top + boundingBox.height / 2;
-
-                // Remove the over class from all items
-                list.querySelectorAll('li').forEach((li) => {
-                    li.classList.remove('over');
-                });
+                const insertBefore = mouseY < halfwayPoint;
 
                 if (insertBefore) {
-                    listItem.classList.add('over-top-half');
+                    list.insertBefore(draggingElement, listItem);
                 } else {
-                    listItem.classList.add('over-bottom-half');
+                    list.insertBefore(draggingElement, listItem.nextSibling);
                 }
             }
         });
 
         list.addEventListener('dragleave', (e) => {
             e.preventDefault();
-            const listItem = e.target.closest('li');
-
-            if (listItem) {
-                listItem.classList.remove('over-top-half', 'over-bottom-half');
-            }
         });
 
         list.addEventListener('drop', (e) => {
             e.preventDefault();
-
-            if (e.target.tagName === 'LI') {
-                e.target.classList.remove('over-top-half', 'over-bottom-half');
-                const dropTargetIndex = Array.from(list.children).indexOf(e.target);
-
-                // Insert the dragged item before or after the drop target
-                if (e.target.classList.contains('over-bottom-half')) {
-                    list.insertBefore(draggingElement, list.children[dropTargetIndex + 1]);
-                } else {
-                    list.insertBefore(draggingElement, list.children[dropTargetIndex]);
-                }
-            }
+            e.target.classList.remove('over-top-half', 'over-bottom-half');
         });
 
         list.addEventListener('dragend', (e) => {
