@@ -14,7 +14,19 @@
         </select>
 
         <button id="info" type="button" class="info-btn" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-container="body" data-bs-title="How to play">ℹ️</button>
+        
+        <div style="text-align:center; margin: auto 0rem;">
+            <button id="start-btn">Start</button>
+        </div>
+        
+
+        <div class="countdown">
+            <span id="timer"></span>
+        </div>
+          
     </div>
+
+
     <ul id="sortable-list">
         @{
             // Define an array of colors
@@ -175,5 +187,34 @@
                     console.error('Error:', error);
                 });
         }
+
+
+        //Code Attribution
+        //Link: https://codepen.io/gulzaib/pen/PoKVmNw
+        //Author: Gulzaib
+
+        var timeInSecs;
+        var ticker;
+
+        function startTimer(secs) {
+            timeInSecs = parseInt(secs);
+            ticker = setInterval("tick()", 1000);
+        }
+
+        function tick() {
+            var secs = timeInSecs;
+            if (secs > 0) {
+                timeInSecs--;
+            }
+            
+            var mins = Math.floor(secs / 60);
+            secs %= 60;
+
+            var pretty = ((secs < 10) ? "0" : "") + secs;
+
+            document.getElementById("timer").innerHTML = pretty;
+        }
+
+        startTimer(3);
     </script>
 </body>

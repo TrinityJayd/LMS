@@ -133,15 +133,27 @@ body {
         font-weight: 600;
     }
 
+
+.countdown {
+    border:2px solid #457EAC;
+    border-radius: 50px;
+    color: #457EAC;
+    font-size:1.2rem;
+    font-weight: 600;
+    margin: auto 0rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
+
 .custom-select {
     border: 2px solid #457EAC;
     border-radius: 20px;
     color: #457EAC;
     font-size: 1rem;
     font-weight: 600;
-    margin-right:2rem;
+    margin-right: 2rem;
     padding: 0.5rem 0.5rem;
-   
 }
 
 .custom-select option{
@@ -153,7 +165,8 @@ select:focus {
 }
 
 .level-info-container{
-    margin-top:2rem;
+    margin-top:3rem;
+    margin-bottom: 2rem;
 }
 
 .info-btn {
@@ -162,8 +175,9 @@ select:focus {
     border-radius: 20px;
     color: #457EAC;
     font-size: 1rem;
-    text-align: right !important;
+    margin-right:1rem;
     padding: 0.5rem 1rem;
+    text-align: right !important;
 }
 
     .info-btn:hover {
@@ -187,7 +201,23 @@ select:focus {
     color:black;
 }
 
+#start-btn {
+    border: 2px solid #457EAC;
+    background-color: #457EAC;
+    border-radius: 40px;
+    color: white;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-right:1rem;
+    padding: 0.5rem 2rem;
+}
 
+#start-btn:hover{
+background-color: white;
+    border: 2px solid #457EAC;
+    color: #457EAC;
+    font-weight: 600;
+}
 
 
 /*  Identify Areas    */
