@@ -15,8 +15,6 @@ namespace LMS.Controllers
             ViewBag.Items = callNumbers;
 
             levels = game.GameLevelDescription();
-
-            //get the value where the key equals Easy
             ViewBag.Levels = levels;
 
             return View();
@@ -25,8 +23,10 @@ namespace LMS.Controllers
         [HttpPost]
         public IActionResult SubmitSortedItems([FromBody] string[] sortedItems)
         {
+            //convert the array to a list
             var items = sortedItems.ToList();
 
+            //check the order of the items
             var result = game.CheckOrder(items);
 
             return Ok();

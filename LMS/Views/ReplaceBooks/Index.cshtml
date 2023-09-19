@@ -2,17 +2,17 @@
     var levels = ViewBag.Levels;
 }
 
-<body style="text-align:center;">
+<body>
     <h1 class="page-headings">Sort The Call Numbers In Ascending Order</h1>
 
-    <select class="custom-select" id="level-select">
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Challenger">Challenger</option>
-        <option value="Expert">Expert</option>
-    </select>
+    <div class="d-flex level-info-container">
+        <select class="custom-select" id="level-select">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Challenger">Challenger</option>
+            <option value="Expert">Expert</option>
+        </select>
 
-    <div class="d-flex justify-content-end">
         <button id="info" type="button" class="info-btn" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-container="body" data-bs-title="How to play">ℹ️</button>
     </div>
     <ul id="sortable-list">
@@ -37,22 +37,34 @@
         }
     </ul>
 
-    <button id="check-submit-button">Check</button>
+    <div class="d-flex justify-content-center">
+        <button id="check-submit-button">Check</button>
+    </div>
+    
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Get the levels from the ViewBag and parse them as JSON
         var levels = @Html.Raw(Json.Serialize(levels));
+
         const infoButton = document.getElementById('info');
-        var popoverInstance = null; // Initialize the popover instance
-        var popoverVisible = false; // Custom flag to track visibility
+
+        // Initialize the popover instance
+        var popoverInstance = null; 
+
+        // Track visibility
+        var popoverVisible = true; 
 
         function updatePopoverContent() {
             const selectElement = document.getElementById('level-select');
+            // Get the selected value from the select element
             const selectedValue = selectElement.value;
-            const popoverContent = levels[selectedValue];
 
-            // Update the popover's content attribute
+            // Create the popovers content
+            const popoverContent = selectedValue + ": " + levels[selectedValue];
+
+            // Update the popover's content 
             infoButton.setAttribute('data-bs-content', popoverContent);
 
             if (popoverInstance) {
@@ -62,7 +74,7 @@
 
             // Reinitialize the popover to apply the updated content
             popoverInstance = new bootstrap.Popover(infoButton, {
-                container: 'body' // Specify the container to fix the issue with dynamic content
+                container: 'body' 
             });
 
             if (popoverVisible) {
@@ -76,24 +88,36 @@
             }
         }
 
+        // Attach the updatePopoverContent function to the info button's click event
         infoButton.addEventListener('click', updatePopoverContent);
 
-        // Call updatePopoverContent initially to set the initial content
-        updatePopoverContent();    
+        // Call updatePopoverContent to set the content 
+        updatePopoverContent();  
+        
+        document.addEventListener('click', (e) => {           
+            // Check if the popover is open and the click is outside of the popover and the info button
+            if (popoverVisible && e.target !== infoButton && !infoButton.contains(e.target)) {
+                popoverInstance.hide();
+                popoverVisible = false;
+            }
+        });
 
+        // Get the list element
         const list = document.getElementById('sortable-list');
         let draggingElement = null;
 
+        // Attach the dragstart event listener to the list element
         list.addEventListener('dragstart', (e) => {
             draggingElement = e.target;
-            e.dataTransfer.setData('text/plain', e.target.textContent);
-            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.textContent);          
         });
 
+        // Attach the dragend event listener to the list element
         list.addEventListener('dragover', (e) => {
             e.preventDefault();
         });
 
+        // Attach the dragenter event listener to the list element
         list.addEventListener('dragenter', (e) => {
             const listItem = e.target.closest('li');
 
@@ -104,7 +128,7 @@
 
                 // Determine the position to insert the dragged item
                 const insertBefore = mouseY < halfwayPoint;
-
+             
                 if (insertBefore) {
                     list.insertBefore(draggingElement, listItem);
                 } else {
@@ -122,21 +146,15 @@
             e.target.classList.remove('over-top-half', 'over-bottom-half');
         });
 
-        list.addEventListener('dragend', (e) => {
-            e.target.classList.remove('dragging');
-        });
 
         const submitButton = document.getElementById('check-submit-button');
 
         // Attach the handleSubmit function to the submit button's click event
         submitButton.addEventListener('click', handleSubmit);
-
-        // Define the handleSubmit function
+       
         function handleSubmit() {
             // Get the sorted order of the items
             const sortedItems = Array.from(list.children).map(li => li.textContent);
-
-            console.log('Data to send:', sortedItems);
 
             // Send the sortedItems to the server using a POST request
             fetch('/ReplaceBooks/SubmitSortedItems', {
@@ -148,10 +166,8 @@
             })
                 .then(response => {
                     if (response.ok) {
-                        // Handle success, you can show a message to the user if needed
                         console.log('Sorted items submitted successfully');
                     } else {
-                        // Handle error, you can show an error message to the user if needed
                         console.error('Error submitting sorted items');
                     }
                 })

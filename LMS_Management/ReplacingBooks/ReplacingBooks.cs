@@ -16,11 +16,16 @@ namespace LMS_Management.ReplacingBooks
             Random random = new Random();
             for (int i = 0; i < 10; i++)
             {
-                string firstThreeDigits = random.Next(1, 1000).ToString();                  
+                //generate 3 random digits
+                string firstThreeDigits = random.Next(1, 1000).ToString(); 
+
+                //format the digits to have 3 digits
                 firstThreeDigits = AddZeros(firstThreeDigits);
 
+                //generate 3 random digits after the period
                 string digitsAfterPeriod = random.Next(1, 1000).ToString();
 
+                //create the call number
                 callNumbers.Add(firstThreeDigits + "." + digitsAfterPeriod);
 
             }
@@ -29,7 +34,7 @@ namespace LMS_Management.ReplacingBooks
 
 
 
-        //sort the call numbers in ascending order using a sorting algorithm
+        //sort the call numbers in ascending order 
         public List<string> SortCallNumbers()
         {
             for (int i = 0; i < callNumbers.Count; i++)
@@ -60,6 +65,7 @@ namespace LMS_Management.ReplacingBooks
 
             for (int i = 0; i < callNumbers.Count; i++)
             {
+                //if the user's call numbers are not in the same order as the sorted call numbers, return false
                 if (userCallNumbers[i] != callNumbers[i])
                 {
                     return false;
@@ -70,6 +76,7 @@ namespace LMS_Management.ReplacingBooks
 
         public static string AddZeros(string text)
         {
+            //add zeros to the front of the string if the string is less than 3 characters
             if(text.Length == 1)
             {
                 text = "00" + text;
@@ -87,15 +94,18 @@ namespace LMS_Management.ReplacingBooks
         {
             Random random = new Random();
 
+            //create a string of all the letters in the alphabet
             string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
             string randomLetters = "";
 
+            //generate 3 random letters
             for (int i = 0; i < 3; i++)
             {
                 randomLetters += letters[random.Next(0, letters.Length)];
             }
 
+            //these letters will be used to create a call number, for the authors last name
             return randomLetters;
         }
 
