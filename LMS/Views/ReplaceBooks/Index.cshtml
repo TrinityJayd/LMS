@@ -1,9 +1,24 @@
-﻿<body style="text-align:center;">
+﻿@{
+    var levels = ViewBag.Levels;
+}
+
+<body style="text-align:center;">
     <h1 class="page-headings">Sort The Call Numbers In Ascending Order</h1>
+
+    <select class="custom-select" id="level-select">
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Challenger">Challenger</option>
+        <option value="Expert">Expert</option>
+    </select>
+
+    <div class="d-flex justify-content-end">
+        <button id="info" type="button" class="info-btn" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-container="body" data-bs-title="How to play">ℹ️</button>
+    </div>
     <ul id="sortable-list">
         @{
             // Define an array of colors
-            string[] colors = { "#FF5733", "#33FF57", "#5733FF", "#FF33A3", "#33A3FF", "#FFFF33", "#33FFFF", "#333333", "#777777", "#AAAAAA" };
+            string[] colors = { "#FFBE0B", "#FB5607", "#FF006E", "#8338EC", "#3A86FF", "#5DD39E", "#CFBFF7", "#107E7D", "#BEEE62", "#FFB8DE" };
         }
 
         @foreach (var item in ViewBag.Items)
@@ -24,7 +39,48 @@
 
     <button id="check-submit-button">Check</button>
 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
+        var levels = @Html.Raw(Json.Serialize(levels));
+        const infoButton = document.getElementById('info');
+        var popoverInstance = null; // Initialize the popover instance
+        var popoverVisible = false; // Custom flag to track visibility
+
+        function updatePopoverContent() {
+            const selectElement = document.getElementById('level-select');
+            const selectedValue = selectElement.value;
+            const popoverContent = levels[selectedValue];
+
+            // Update the popover's content attribute
+            infoButton.setAttribute('data-bs-content', popoverContent);
+
+            if (popoverInstance) {
+                // Dispose of the existing popover instance
+                popoverInstance.dispose();
+            }
+
+            // Reinitialize the popover to apply the updated content
+            popoverInstance = new bootstrap.Popover(infoButton, {
+                container: 'body' // Specify the container to fix the issue with dynamic content
+            });
+
+            if (popoverVisible) {
+                // If the popover was visible before, hide it
+                popoverInstance.hide();
+                popoverVisible = false;
+            } else {
+                // Otherwise, show the popover
+                popoverInstance.show();
+                popoverVisible = true;
+            }
+        }
+
+        infoButton.addEventListener('click', updatePopoverContent);
+
+        // Call updatePopoverContent initially to set the initial content
+        updatePopoverContent();    
+
         const list = document.getElementById('sortable-list');
         let draggingElement = null;
 

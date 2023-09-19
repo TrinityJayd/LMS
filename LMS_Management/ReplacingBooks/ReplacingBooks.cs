@@ -99,18 +99,20 @@ namespace LMS_Management.ReplacingBooks
             return randomLetters;
         }
 
-        public List<string> GameLevelDescription()
+        public Dictionary<string, string> GameLevelDescription()
         {
-            List<string> levels = new List<string>()
+            //create a dictionary where the key is the level name and the description is the value
+            Dictionary<string, string> levels = new Dictionary<string, string>
             {
-                ("Beginner: Sort numbers without a timer."),
-                ("Intermediate: Sort numbers within 45 seconds."),
-                ("Challenger: Sort numbers and letters within 45 seconds."),
-                ("Expert: Master sorting numbers and letters within 30 seconds.")
+                { "Beginner", "Sort numbers without a timer." },
+                { "Intermediate", "Sort numbers within 45 seconds." },
+                { "Challenger", "Sort numbers and letters within 45 seconds." },
+                { "Expert", "Master sorting numbers and letters within 30 seconds." }
+
             };
 
             return levels;
-        }
-
+        }          
+        
     }
 }

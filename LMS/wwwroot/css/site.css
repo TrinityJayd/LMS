@@ -126,6 +126,10 @@ body {
     width:10%;
 }
 
+.custom-select{
+
+}
+
     #check-submit-button:hover {
         background-color: white;
         border: 2px solid #457EAC;
@@ -136,6 +140,36 @@ body {
 .dragging {
 }
 
+.info-btn {
+    background-color: white;
+    border: 2px solid #457EAC;
+    border-radius: 20px;
+    color: #457EAC;
+    font-size: 1rem;
+    text-align: right !important;
+    padding: 0.5rem 1rem;
+}
+
+    .info-btn:hover {
+        background-color: #457EAC;
+        border: none;
+        color: white;
+        font-weight: 700;
+    }
+
+.popover-header {
+    background-color: #457EAC;
+    border-color:#457EAC;
+    font-family:"Montserrat",sans-serif;
+    font-weight:600;
+    color:white;
+}
+
+.popover-body{
+    font-family:"Montserrat",sans-serif;
+    font-weight:500;
+    color:black;
+}
 
 
 
