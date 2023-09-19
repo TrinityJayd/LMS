@@ -114,10 +114,10 @@ namespace LMS_Management.ReplacingBooks
             //create a dictionary where the key is the level name and the description is the value
             Dictionary<string, string> levels = new Dictionary<string, string>
             {
-                { "Beginner", "Sort numbers without a timer." },
-                { "Intermediate", "Sort numbers within 45 seconds." },
-                { "Challenger", "Sort numbers and letters within 45 seconds." },
-                { "Expert", "Master sorting numbers and letters within 30 seconds." }
+                { "Beginner", "Sort call numbers without a timer." },
+                { "Intermediate", "Sort call numbers with the author's last name within 45 seconds." },
+                { "Challenger", "Sort numbers and letters within 35 seconds." },
+                { "Expert", "Master sorting numbers and letters within 25 seconds." }
 
             };
 

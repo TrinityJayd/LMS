@@ -20,7 +20,7 @@
         </div>
         
 
-        <div class="countdown">
+        <div id="timer-container" class="countdown">
             <span id="timer"></span>
         </div>
           
@@ -52,6 +52,20 @@
     <div class="d-flex justify-content-center">
         <button id="check-submit-button">Check</button>
     </div>
+
+    <div id="result-modal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="border: none;">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button id="close-modal1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                    <button id="close-modal2" type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -61,18 +75,30 @@
         var levels = @Html.Raw(Json.Serialize(levels));
 
         const infoButton = document.getElementById('info');
-
+        
         // Initialize the popover instance
         var popoverInstance = null; 
 
         // Track visibility
         var popoverVisible = true; 
 
+        const selectElement = document.getElementById('level-select');
+
+        const startButton = document.getElementById('start-btn');
+        startButton.hidden = true;
+
+        selectElement.addEventListener('change', function(){
+            if(selectElement.value == "Beginner"){
+                startButton.hidden = true;
+            }else{
+                startButton.hidden = false;
+            }
+        });
+        
+
         function updatePopoverContent() {
-            const selectElement = document.getElementById('level-select');
             // Get the selected value from the select element
             const selectedValue = selectElement.value;
-
             // Create the popovers content
             const popoverContent = selectedValue + ": " + levels[selectedValue];
 
@@ -98,6 +124,7 @@
                 popoverInstance.show();
                 popoverVisible = true;
             }
+            
         }
 
         // Attach the updatePopoverContent function to the info button's click event
@@ -196,25 +223,72 @@
         var timeInSecs;
         var ticker;
 
+        const timer = document.getElementById('timer-container');
+        timer.hidden = true;
         function startTimer(secs) {
             timeInSecs = parseInt(secs);
             ticker = setInterval("tick()", 1000);
+            startButton.disabled = true;    
+            timer.hidden = false;
         }
 
         function tick() {
             var secs = timeInSecs;
             if (secs > 0) {
                 timeInSecs--;
+            } else {
+                // Enable the "Start" button when the timer reaches zero
+                startButton.disabled = false;
+                clearInterval(ticker);
+
+                timer.hidden = true;
+
+                const result = document.getElementById('result-modal');  
+                const bsModal = new bootstrap.Modal(result);
+                bsModal.show();
+
+
+                const modalCloseButton1 = document.getElementById('close-modal1');
+                modalCloseButton1.addEventListener('click', () => {
+                    // Refresh the page when the modal is closed
+                    location.reload();
+                });
+
+                const modalCloseButton2 = document.getElementById('close-modal2');
+                modalCloseButton2.addEventListener('click', () => {
+                    // Refresh the page when the modal is closed
+                    location.reload();
+                });
             }
             
             var mins = Math.floor(secs / 60);
             secs %= 60;
 
-            var pretty = ((secs < 10) ? "0" : "") + secs;
+            var formatSeconds = ((secs < 10) ? "0" : "") + secs;
 
-            document.getElementById("timer").innerHTML = pretty;
+            timer.innerHTML = formatSeconds;
         }
+  
+        startButton.addEventListener('click', () => {          
+            var level = selectElement.value;
+            if (level == "Intermediate"){
+                startTimer(35);
+                timer.innerHTML = "35";
+            }
+            else if (level == "Challenger"){
+                startTimer(30);
+                timer.innerHTML = "30";
 
-        startTimer(3);
+            }            
+            else if (level == "Expert"){
+                startTimer(5);
+                timer.innerHTML = "25";
+            }
+         
+        });
+
+
+
+        
     </script>
 </body>

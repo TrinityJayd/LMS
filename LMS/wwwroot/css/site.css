@@ -133,12 +133,27 @@ body {
         font-weight: 600;
     }
 
+.close-btn{
+    background-color: #457EAC;
+    border: 2px solid #457EAC;
+    border-radius: 50px;
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
+    .close-btn:hover {
+        background-color: white;
+        border: 2px solid #457EAC;
+        color: #457EAC;
+    }
 
 .countdown {
-    border:2px solid #457EAC;
+    border: 2px solid #457EAC;
     border-radius: 50px;
     color: #457EAC;
-    font-size:1.2rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin: auto 0rem;
     padding: 0.5rem 1rem;
