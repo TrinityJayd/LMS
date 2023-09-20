@@ -8,11 +8,10 @@ namespace LMS_Management.ReplacingBooks
 {
     public class ReplacingBooks
     {
-        private List<string> callNumbers = new List<string>();
-
         //generate 10 random dewey decimal system call numbers 
         public List<string> GenerateCallNumbers()
         {
+            List<string> callNumbers = new List<string>();
             Random random = new Random();
             for (int i = 0; i < 10; i++)
             {
@@ -35,38 +34,39 @@ namespace LMS_Management.ReplacingBooks
 
 
         //sort the call numbers in ascending order 
-        public List<string> SortCallNumbers()
+        public List<string> SortCallNumbers(List<string> callNums)
         {
-            for (int i = 0; i < callNumbers.Count; i++)
+            for (int i = 0; i < callNums.Count; i++)
             {
-                for (int j = i + 1; j < callNumbers.Count; j++)
+                for (int j = i + 1; j < callNums.Count; j++)
                 {
                     // Parse the call numbers into numeric values
-                    double number1 = double.Parse(callNumbers[i]);
-                    double number2 = double.Parse(callNumbers[j]);
+                    double number1 = double.Parse(callNums[i]);
+                    double number2 = double.Parse(callNums[j]);
 
                     if (number1 > number2)
                     {
                         // Swap the call numbers if they are out of order
-                        string temp = callNumbers[i];
-                        callNumbers[i] = callNumbers[j];
-                        callNumbers[j] = temp;
+                        string temp = callNums[i];
+                        callNums[i] = callNums[j];
+                        callNums[j] = temp;
                     }
                 }
             }
-            return callNumbers;
+            return callNums;
         }
 
 
         //recieve the list from the user and check if the order is correct
-        public bool CheckOrder(List<string> userCallNumbers)
+        public bool CheckOrder(List<string> userCallNumbers, List<string> gameCallNumbers)
         {
-            callNumbers = SortCallNumbers();
+            gameCallNumbers = SortCallNumbers(gameCallNumbers);
 
-            for (int i = 0; i < callNumbers.Count; i++)
+            for (int i = 0; i < gameCallNumbers.Count; i++)
             {
+                var res = userCallNumbers[i] ;
                 //if the user's call numbers are not in the same order as the sorted call numbers, return false
-                if (userCallNumbers[i] != callNumbers[i])
+                if (userCallNumbers[i] != gameCallNumbers[i])
                 {
                     return false;
                 }

@@ -57,7 +57,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" style="border: none;">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 id="outcome" class="modal-title">Modal title</h5>
                     <button id="close-modal1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer" style="border: none;">
@@ -81,6 +81,8 @@
 
         // Track visibility
         var popoverVisible = true; 
+
+        let gameInProgress = false;
 
         const selectElement = document.getElementById('level-select');
 
@@ -187,11 +189,19 @@
 
 
         const submitButton = document.getElementById('check-submit-button');
+        const resultMod = document.getElementById('result-modal');
+        const modalTitle = document.getElementById('outcome');
 
         // Attach the handleSubmit function to the submit button's click event
         submitButton.addEventListener('click', handleSubmit);
        
         function handleSubmit() {
+            if (gameInProgress) {
+                // Stop the timer if the game is in progress
+                clearInterval(ticker);
+                gameInProgress = false;
+            }
+
             // Get the sorted order of the items
             const sortedItems = Array.from(list.children).map(li => li.textContent);
 
@@ -205,9 +215,21 @@
             })
                 .then(response => {
                     if (response.ok) {
-                        console.log('Sorted items submitted successfully');
+                        return response.text()
+                            .then(result => {
+                                const bsModal = new bootstrap.Modal(resultMod);
+                                
+                                if (result === 'Win') {
+                                    modalTitle.textContent = 'Congratulations! You Win!';
+                                } else if (result === 'Lose') {
+                                    modalTitle.textContent = 'Oops! You Lose!';
+                                }
+
+                                bsModal.show();
+                            });
                     } else {
                         console.error('Error submitting sorted items');
+                        return Promise.reject('Error submitting sorted items');
                     }
                 })
                 .catch(error => {
@@ -225,11 +247,13 @@
 
         const timer = document.getElementById('timer-container');
         timer.hidden = true;
+
         function startTimer(secs) {
             timeInSecs = parseInt(secs);
             ticker = setInterval("tick()", 1000);
-            startButton.disabled = true;    
+            startButton.hidden = true;
             timer.hidden = false;
+            gameInProgress = true;
         }
 
         function tick() {
@@ -237,28 +261,19 @@
             if (secs > 0) {
                 timeInSecs--;
             } else {
-                // Enable the "Start" button when the timer reaches zero
-                startButton.disabled = false;
+                startButton.hidden = false;
                 clearInterval(ticker);
 
                 timer.hidden = true;
 
-                const result = document.getElementById('result-modal');  
-                const bsModal = new bootstrap.Modal(result);
+                gameInProgress = false;
+
+                  
+                const bsModal = new bootstrap.Modal(resultMod);
                 bsModal.show();
 
 
-                const modalCloseButton1 = document.getElementById('close-modal1');
-                modalCloseButton1.addEventListener('click', () => {
-                    // Refresh the page when the modal is closed
-                    location.reload();
-                });
-
-                const modalCloseButton2 = document.getElementById('close-modal2');
-                modalCloseButton2.addEventListener('click', () => {
-                    // Refresh the page when the modal is closed
-                    location.reload();
-                });
+                
             }
             
             var mins = Math.floor(secs / 60);
@@ -268,6 +283,18 @@
 
             timer.innerHTML = formatSeconds;
         }
+
+        const modalCloseButton1 = document.getElementById('close-modal1');
+        modalCloseButton1.addEventListener('click', () => {
+            // Refresh the page when the modal is closed
+            location.reload();
+        });
+
+        const modalCloseButton2 = document.getElementById('close-modal2');
+        modalCloseButton2.addEventListener('click', () => {
+            // Refresh the page when the modal is closed
+            location.reload();
+        });
   
         startButton.addEventListener('click', () => {          
             var level = selectElement.value;
@@ -287,6 +314,7 @@
          
         });
 
+        
 
 
         
