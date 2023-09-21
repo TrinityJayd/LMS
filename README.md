@@ -10,10 +10,11 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
 ## Table of Contents
 
 - [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
+- [Usage](#usage-instructions)
+   - [Prerequisites](#prerequisites)
+   - [Compilation](#compilation)
 
+     
 ## Features
 
 1. **Choose a Task:**
@@ -44,13 +45,13 @@ To compile and run the Dewey Decimal System Training Application, follow these s
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/TrinityJayd/lms.git
+   git clone https://github.com/TrinityJayd/LMS.git
    ```
 
 2. Open your terminal or command prompt and navigate to the project's root directory:
 
    ```bash
-   cd lms
+   cd LMS
    ```
 
 3. Compile the application using the .NET CLI:
