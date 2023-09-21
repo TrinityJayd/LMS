@@ -1,28 +1,14 @@
 ﻿
-const infoButton = document.getElementById('info');
+// POPOVER ABOUT THE DIFFERENT LEVELS
 
+const infoButton = document.getElementById('info');
 // Initialize the popover instance
 var popoverInstance = null;
 
 // Track visibility
 var popoverVisible = true;
 
-let gameInProgress = false;
-
 const selectElement = document.getElementById('level-select');
-
-const startButton = document.getElementById('start-btn');
-startButton.hidden = true;
-
-selectElement.addEventListener('change', function () {
-    if (selectElement.value == "Beginner") {
-        startButton.hidden = true;
-    } else {
-        startButton.hidden = false;
-    }
-});
-
-
 function updatePopoverContent() {
     // Get the selected value from the select element
     const selectedValue = selectElement.value;
@@ -68,6 +54,11 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// END
+
+
+// MAKE THE LIST DRAGGABLE
+
 // Get the list element
 const list = document.getElementById('sortable-list');
 let draggingElement = null;
@@ -112,22 +103,27 @@ list.addEventListener('drop', (e) => {
     e.target.classList.remove('over-top-half', 'over-bottom-half');
 });
 
+//END
+
+
+// SUBMIT THE SORTED LIST
 
 const submitButton = document.getElementById('check-submit-button');
-const resultMod = document.getElementById('result-modal');
-const modalTitle = document.getElementById('outcome');
-
 // Attach the handleSubmit function to the submit button's click event
 submitButton.addEventListener('click', handleSubmit);
 
+// Variable to track if the timer is in running
+let gameInProgress = false;
+
+// Function for the check button
 function handleSubmit() {
     if (gameInProgress) {
-        // Stop the timer if the game is in progress
+        // Stop the timer if the timer is in running
         clearInterval(ticker);
         gameInProgress = false;
     }
 
-    // Get the sorted order of the items
+    // Get the user sorted order of the items
     const sortedItems = Array.from(list.children).map(li => li.textContent);
 
     // Send the sortedItems to the server using a POST request
@@ -142,8 +138,10 @@ function handleSubmit() {
             if (response.ok) {
                 return response.text()
                     .then(result => {
+                        const resultMod = document.getElementById('result-modal');
                         const bsModal = new bootstrap.Modal(resultMod);
 
+                        const modalTitle = document.getElementById('outcome');
                         if (result === 'Win') {
                             modalTitle.textContent = 'Congratulations! You Win!';
                         } else if (result === 'Lose') {
@@ -162,6 +160,10 @@ function handleSubmit() {
         });
 }
 
+// END
+
+
+// TIMER FUNCTIONALITY
 
 //Code Attribution
 //Link: https://codepen.io/gulzaib/pen/PoKVmNw
@@ -173,19 +175,45 @@ var ticker;
 const timer = document.getElementById('timer-container');
 timer.hidden = true;
 
+const startButton = document.getElementById('start-btn');
+startButton.hidden = true;
+
+selectElement.addEventListener('change', function () {
+    // The beginner level does not use the timer so it can be hidden
+    if (selectElement.value == "Beginner") {
+        startButton.hidden = true;
+        submitButton.hidden = false;
+    } else {
+        startButton.hidden = false;
+        submitButton.hidden = true;
+    }
+});
+
+
 function startTimer(secs) {
     timeInSecs = parseInt(secs);
+
+    // Start the timer
     ticker = setInterval("tick()", 1000);
+
+    // Hide the start button
     startButton.hidden = true;
+
+    // Show the timer
     timer.hidden = false;
+
+    // The timer is in running
     gameInProgress = true;
 }
 
 function tick() {
     var secs = timeInSecs;
+
+    // If the timer is running, decrement the time
     if (secs > 0) {
         timeInSecs--;
     } else {
+        // Otherwise, stop the timer and submit the sorted list
         startButton.hidden = false;
         clearInterval(ticker);
 
@@ -193,10 +221,10 @@ function tick() {
 
         gameInProgress = false;
 
-
         handleSubmit();
     }
 
+    // Format the seconds to display
     var mins = Math.floor(secs / 60);
     secs %= 60;
 
@@ -209,6 +237,8 @@ function tick() {
 
 startButton.addEventListener('click', () => {
     var level = selectElement.value;
+
+    //Depending on the level the countdown will be different
     if (level == "Intermediate") {
         startTimer(35);
         timer.innerHTML = "35";
@@ -219,12 +249,15 @@ startButton.addEventListener('click', () => {
 
     }
     else if (level == "Expert") {
-        startTimer(5);
+        startTimer(25);
         timer.innerHTML = "25";
     }
 
+    submitButton.hidden = false;
+
 });
 
+// END 
 
 //Close Buttons for Modal
 

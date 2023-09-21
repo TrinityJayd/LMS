@@ -12,7 +12,7 @@ namespace LMS.Controllers
         private static List<string> callNumbers = new List<string>();
 
         public IActionResult Index()
-        {        
+        {
             callNumbers = game.GenerateCallNumbers();
             ViewBag.Items = callNumbers;
 
@@ -30,15 +30,15 @@ namespace LMS.Controllers
 
             //When the list is retrieved it has some extra characters so we need to remove them
             List<string> extractedNumbers = sortedItems
-                    .Select(item =>
-                    {
-                        //Match numbers (with or without periods)
-                        MatchCollection matches = Regex.Matches(item, @"\d+(\.\d+)?");
+            .Select(item =>
+            {
+                // Match numbers (with optional period and exactly 2 digits after the period) followed by 3 letters
+                MatchCollection matches = Regex.Matches(item, @"\d+(\.\d{2})? [A-Z]{3}");
 
-                        // Join the matched numbers into a single string
-                        return string.Join("", matches.Cast<Match>().Select(match => match.Value));
-                    })
-                    .ToList();
+                // Join the matched numbers into a single string
+                return string.Join(" ", matches.Cast<Match>().Select(match => match.Value));
+            })
+            .ToList();
 
             //check the order of the items
             var outcome = game.CheckOrder(extractedNumbers, callNumbers);
@@ -50,7 +50,7 @@ namespace LMS.Controllers
                 result = "Win";
             }
 
-            
+
             return Ok(result);
         }
 

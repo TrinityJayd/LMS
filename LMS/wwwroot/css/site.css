@@ -56,13 +56,25 @@ body {
     background-color: #DD88C2;
 }
 
+    #replacing-books-square:hover {
+        background-color: #C279AB;
+    }
+
 #identifying-areas-square {
     background-color: #457EAC;
 }
 
+    #identifying-areas-square:hover {
+        background-color: #3C6D94;
+    }
+
 #find-callnums-square {
     background-color: #659157;
 }
+
+    #find-callnums-square:hover {
+        background-color: #5A7E4C;
+    }
 
 
 .learn-cards{
@@ -234,6 +246,3 @@ background-color: white;
     color: #457EAC;
     font-weight: 600;
 }
-
-
-/*  Identify Areas    */

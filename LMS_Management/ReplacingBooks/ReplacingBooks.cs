@@ -16,7 +16,7 @@ namespace LMS_Management.ReplacingBooks
             for (int i = 0; i < 10; i++)
             {
                 // Generate 3 random digits
-                string firstThreeDigits = random.Next(1, 100).ToString();
+                string firstThreeDigits = random.Next(1, 1000).ToString();
 
                 // Format the digits to have 3 digits
                 firstThreeDigits = AddZeros(firstThreeDigits);
@@ -30,7 +30,7 @@ namespace LMS_Management.ReplacingBooks
                 if (includePeriod)
                 {
                     // Generate 3 random digits after the period
-                    string digitsAfterPeriod = random.Next(1, 1000).ToString();
+                    string digitsAfterPeriod = random.Next(1, 100).ToString();
                     callNumber = firstThreeDigits + "." + digitsAfterPeriod + " " + GenerateLetters();
                 }
                 else
@@ -55,14 +55,12 @@ namespace LMS_Management.ReplacingBooks
                 string current = callNums[i];
                 int j = i - 1;
 
-                // Compare numeric parts first
                 while (j >= 0 && Compare(callNums[j], current) > 0)
                 {
                     callNums[j + 1] = callNums[j];
                     j--;
                 }
-
-                // Compare string parts if numeric parts are equal
+                
                 callNums[j + 1] = current;
             }
 
@@ -94,6 +92,7 @@ namespace LMS_Management.ReplacingBooks
                 return numericComparison;
             }
 
+            //Compare the letters
             return string.Compare(partsVal1[1], partsVal2[1], StringComparison.Ordinal);
         }
 
@@ -155,10 +154,10 @@ namespace LMS_Management.ReplacingBooks
             //create a dictionary where the key is the level name and the description is the value
             Dictionary<string, string> levels = new Dictionary<string, string>
             {
-                { "Beginner", "Sort call numbers without a timer." },
-                { "Intermediate", "Sort call numbers with the author's last name within 45 seconds." },
-                { "Challenger", "Sort numbers and letters within 35 seconds." },
-                { "Expert", "Master sorting numbers and letters within 25 seconds." }
+                { "Beginner", "Sort the call numbers without a timer." },
+                { "Intermediate", "Sort the call numbers within 40 seconds." },
+                { "Challenger", "Sort the call numbers within 35 seconds." },
+                { "Expert", "Master sorting the call numbers within 25 seconds." }
 
             };
 
