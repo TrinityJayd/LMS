@@ -28,10 +28,11 @@ namespace LMS.Controllers
             //convert the array to a list
             var items = sortedItems.ToList();
 
+            //When the list is retrieved it has some extra characters so we need to remove them
             List<string> extractedNumbers = sortedItems
                     .Select(item =>
                     {
-                        // Use a regular expression to match numbers (with or without periods)
+                        //Match numbers (with or without periods)
                         MatchCollection matches = Regex.Matches(item, @"\d+(\.\d+)?");
 
                         // Join the matched numbers into a single string

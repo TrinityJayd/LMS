@@ -15,45 +15,86 @@ namespace LMS_Management.ReplacingBooks
             Random random = new Random();
             for (int i = 0; i < 10; i++)
             {
-                //generate 3 random digits
-                string firstThreeDigits = random.Next(1, 1000).ToString(); 
+                // Generate 3 random digits
+                string firstThreeDigits = random.Next(1, 100).ToString();
 
-                //format the digits to have 3 digits
+                // Format the digits to have 3 digits
                 firstThreeDigits = AddZeros(firstThreeDigits);
 
-                //generate 3 random digits after the period
-                string digitsAfterPeriod = random.Next(1, 1000).ToString();
+                // Decide whether to include the period or not
+                bool includePeriod = random.Next(0, 10) < 7; // 70% chance of including period
 
-                //create the call number
-                callNumbers.Add(firstThreeDigits + "." + digitsAfterPeriod);
 
+                string callNumber;
+
+                if (includePeriod)
+                {
+                    // Generate 3 random digits after the period
+                    string digitsAfterPeriod = random.Next(1, 1000).ToString();
+                    callNumber = firstThreeDigits + "." + digitsAfterPeriod + " " + GenerateLetters();
+                }
+                else
+                {
+                    callNumber = firstThreeDigits + " " + GenerateLetters();
+                }
+
+                // Create the call number
+                callNumbers.Add(callNumber);
             }
             return callNumbers;
         }
 
 
 
+
         //sort the call numbers in ascending order 
         public List<string> SortCallNumbers(List<string> callNums)
         {
-            for (int i = 0; i < callNums.Count; i++)
+            for (int i = 1; i < callNums.Count; i++)
             {
-                for (int j = i + 1; j < callNums.Count; j++)
-                {
-                    // Parse the call numbers into numeric values
-                    double number1 = double.Parse(callNums[i]);
-                    double number2 = double.Parse(callNums[j]);
+                string current = callNums[i];
+                int j = i - 1;
 
-                    if (number1 > number2)
-                    {
-                        // Swap the call numbers if they are out of order
-                        string temp = callNums[i];
-                        callNums[i] = callNums[j];
-                        callNums[j] = temp;
-                    }
+                // Compare numeric parts first
+                while (j >= 0 && Compare(callNums[j], current) > 0)
+                {
+                    callNums[j + 1] = callNums[j];
+                    j--;
                 }
+
+                // Compare string parts if numeric parts are equal
+                callNums[j + 1] = current;
             }
+
             return callNums;
+        }
+
+        public static int Compare(string val1, string val2)
+        {
+            //Split the numbers from the letters
+            string[] partsVal1 = val1.Split(' ');
+            string[] partsVal2 = val2.Split(' ');
+
+            //There must be letters and numbers
+            if (partsVal1.Length != 2 || partsVal2.Length != 2)
+            {
+                throw new ArgumentException("Invalid input format");
+            }
+
+            double numberX, numberY;
+            if (!double.TryParse(partsVal1[0], out numberX) || !double.TryParse(partsVal2[0], out numberY))
+            {
+                throw new ArgumentException("Invalid numeric part");
+            }
+
+            int numericComparison = numberX.CompareTo(numberY);
+
+            if (numericComparison != 0)
+            {
+                return numericComparison;
+            }
+
+            return string.Compare(partsVal1[1], partsVal2[1], StringComparison.Ordinal);
         }
 
 
