@@ -59,6 +59,11 @@ document.addEventListener('click', (e) => {
 
 // MAKE THE LIST DRAGGABLE
 
+
+// Code Attribution
+// Link:https://www.w3schools.com/html/html5_draganddrop.asp
+// Author: W3Schools
+
 // Get the list element
 const list = document.getElementById('sortable-list');
 let draggingElement = null;
