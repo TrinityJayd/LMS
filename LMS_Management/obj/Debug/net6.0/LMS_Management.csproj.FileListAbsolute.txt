@@ -1,7 +1,6 @@
 C:\Users\lab_services_student\source\repos\LMS\LMS_Management\bin\Debug\net6.0\LMS_Management.deps.json
 C:\Users\lab_services_student\source\repos\LMS\LMS_Management\bin\Debug\net6.0\LMS_Management.dll
 C:\Users\lab_services_student\source\repos\LMS\LMS_Management\bin\Debug\net6.0\LMS_Management.pdb
-C:\Users\lab_services_student\source\repos\LMS\LMS_Management\obj\Debug\net6.0\LMS_Management.csproj.AssemblyReference.cache
 C:\Users\lab_services_student\source\repos\LMS\LMS_Management\obj\Debug\net6.0\LMS_Management.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\lab_services_student\source\repos\LMS\LMS_Management\obj\Debug\net6.0\LMS_Management.AssemblyInfoInputs.cache
 C:\Users\lab_services_student\source\repos\LMS\LMS_Management\obj\Debug\net6.0\LMS_Management.AssemblyInfo.cs

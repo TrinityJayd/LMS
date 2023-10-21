@@ -1,4 +1,5 @@
 ﻿using LMS.Models;
+using LMS_Management.IdentifyingAreas;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -20,6 +21,9 @@ namespace LMS.Controllers
 
         public IActionResult Learn()
         {
+            IdentifyingAreas identifyingAreas = new IdentifyingAreas();
+            identifyingAreas.GenerateAreas("Call Numbers to Description");
+            identifyingAreas.GetExtras();
             return View();
         }
 
