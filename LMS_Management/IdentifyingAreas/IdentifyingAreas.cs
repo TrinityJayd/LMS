@@ -11,26 +11,41 @@
 
         public Dictionary<string, string> GenerateAreas(string mode)
         {
+            //Set the descriptions
             SetDescriptions();
             areas = new Dictionary<string, string>();
             extras = new string[EXTRAS];
-            if (mode == "Call Numbers to Description")
+
+            //Store the ranges that have already been used to prevent duplicates
+            HashSet<int> usedRanges = new HashSet<int>();
+            while (areas.Count < MAX_ITEMS)
             {
-                for (int i = 0; i < MAX_ITEMS; i++)
+                int callNumber = GetCallNumber();
+                int range = callNumber / 100;
+
+                //If the range has not been used yet, add it
+                if (!usedRanges.Contains(range))
                 {
-                    int callNumber = GetCallNumber();
                     SetKeysAndValues(callNumber);
+                    usedRanges.Add(range);
                 }
 
+            }
+
+            //Depending on the game mode the extras will be different
+            if (mode == "Call Numbers to Description")
+            {
+                //If the user is matching call numbers to descriptions there will be extra descriptions
                 int count = 0;
-                while (extras.Length < EXTRAS)
+                while (count < EXTRAS)
                 {
                     var random = new Random();
                     int randPosition = random.Next(0, 10);
 
                     string description = descriptions[randPosition];
 
-                    if (!areas.ContainsKey(description))
+                    //If the description is not already in the dictionary then add it to the extras
+                    if (!areas.ContainsValue(description))
                     {
                         extras[count] = description;
                         count++;
@@ -39,9 +54,21 @@
             }
             else if (mode == "Descriptions to Call Numbers")
             {
-                
-            }
+                //If the user is matching descriptions to call numbers there will be extra call numbers
+                int count = 0;
+                while (count < EXTRAS)
+                {
+                    int callNumber = GetCallNumber();
+                    int range = callNumber / 100;
 
+                    //If the range has not been used yet, add it to the extras
+                    if (!usedRanges.Contains(range))
+                    {
+                        extras[count] = AddZeros(callNumber);
+                        usedRanges.Add(range);
+                    }
+                }
+            }
 
             return areas;
         }
@@ -53,6 +80,7 @@
 
         private void SetKeysAndValues(int callNumber)
         {
+            //Set the keys and values based on the call number range
             switch (callNumber)
             {
                 case int num when (num >= 0 && num < 100):
@@ -130,15 +158,6 @@
                 return number.ToString();
             }
         }
-
-        private string GetDescription()
-        {
-            var random = new Random();
-            var randomNumber = random.Next(0, 10);
-            return descriptions[randomNumber];
-        }
-
-
 
         private string[] SetDescriptions()
         {

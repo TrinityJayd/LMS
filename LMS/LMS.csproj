@@ -15,8 +15,4 @@
     <ProjectReference Include="..\LMS_Management\LMS_Management.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\IdentifyingAreas\" />
-  </ItemGroup>
-
 </Project>

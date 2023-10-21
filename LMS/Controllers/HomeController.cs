@@ -21,9 +21,6 @@ namespace LMS.Controllers
 
         public IActionResult Learn()
         {
-            IdentifyingAreas identifyingAreas = new IdentifyingAreas();
-            identifyingAreas.GenerateAreas("Call Numbers to Description");
-            identifyingAreas.GetExtras();
             return View();
         }
 

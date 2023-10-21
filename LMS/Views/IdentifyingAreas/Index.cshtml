@@ -1,0 +1,85 @@
+﻿@model LMS.Models.IdentifyingAreasModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Call Numbers List -->
+<ul id="callNumbersList" class="list-group">
+    @foreach (var callNumber in Model.Areas.Keys)
+    {
+        <li class="callNumberItem list-group-item">@callNumber</li>
+    }
+</ul>
+
+<!-- Descriptions List -->
+<ul id="descriptionsList" class="list-group">
+    @foreach (var description in Model.Areas.Values)
+    {
+        <li class="descriptionItem list-group-item">@description</li>
+    }
+
+    @foreach (var extra in Model.Extras)
+    {
+        <li class="descriptionItem list-group-item">@extra</li>
+    }
+
+</ul>
+
+<script>
+    $(document).ready(function() {
+        // Call Number item click event handler
+        $('.callNumberItem').click(function() {
+            console.log("clicked");
+            // Remove highlight from previously selected call number
+            $('.callNumberItem.selected').removeClass('selected');
+
+            // Add highlight to the clicked call number
+            $(this).addClass('selected');
+
+            // Check if a description is already selected
+            if ($('.descriptionItem.selected').length > 0) {
+                // Match the selected call number and description
+                matchItems();
+            }
+        });
+
+        // Description item click event handler
+        $('.descriptionItem').click(function() {
+            // Remove highlight from previously selected description
+            $('.descriptionItem.selected').removeClass('selected');
+
+            // Add highlight to the clicked description
+            $(this).addClass('selected');
+
+            // Check if a call number is already selected
+            if ($('.callNumberItem.selected').length > 0) {
+                // Match the selected call number and description
+                matchItems();
+            }
+        });
+
+        // Function to match selected call number and description items
+        function matchItems() {
+            // Get the selected call number and description
+            var selectedCallNumber = $('.callNumberItem.selected').text();
+            var selectedDescription = $('.descriptionItem.selected').text();
+
+            // Assign the same color to the matched pair
+            var color = getRandomColor();
+            $('.callNumberItem.selected').css('background-color', color);
+            $('.descriptionItem.selected').css('background-color', color);
+        }
+
+        // Function to generate a random color
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    });
+</script>
