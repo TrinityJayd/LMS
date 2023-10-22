@@ -19,6 +19,7 @@ namespace LMS.Controllers
             levels = identifyingAreas.GameLevelDescription();
             ViewBag.Levels = levels;
 
+            //Check what the game mode is
             mode = HttpContext.Session.GetString("Mode");
             if (string.IsNullOrEmpty(mode))
             {
@@ -31,8 +32,33 @@ namespace LMS.Controllers
             areasModel.Areas = areas;
             areasModel.Extras = identifyingAreas.GetExtras();
             areasModel.Mode = mode;
+
+            var keys = areas.Keys.ToList();
+            var values = areas.Values.ToList();
+            //Suffle the list including the extras
+            if (mode == "Call Numbers to Description")
+            {
+                var shuffledKeys = keys.OrderBy(x => Guid.NewGuid()).ToList();
+                areasModel.ShuffledKeys = shuffledKeys;
+
+                values.AddRange(areasModel.Extras);
+                var shuffledValues = values.OrderBy(x => Guid.NewGuid()).ToList();
+                areasModel.ShuffledValues = shuffledValues;
+                return View(areasModel);
+            }
+            else
+            {
+                var shuffledValues = values.OrderBy(x => Guid.NewGuid()).ToList();
+                areasModel.ShuffledValues = shuffledValues;
+
+                keys.AddRange(areasModel.Extras);
+                var shuffledKeys = keys.OrderBy(x => Guid.NewGuid()).ToList();
+                areasModel.ShuffledKeys = shuffledKeys;
+                return View(areasModel);
+            }
             
-            return View(areasModel);
+
+            
         }
 
         [HttpPost]

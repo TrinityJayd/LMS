@@ -6,5 +6,9 @@
         public string[] Extras { get; set; }
         public string Mode { get; set; }
 
+        public List<string> ShuffledKeys { get; set; }
+
+        public List<string> ShuffledValues { get; set; }
+
     }
 }

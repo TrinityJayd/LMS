@@ -41,39 +41,29 @@
     @if (Model.Mode.Equals("Call Numbers to Description"))
     {
         <ul id="leftlist" class="list-group horizontal-list" style="margin-right: 5rem;margin-top: 1.5rem;">
-            @foreach (var callNumber in Model.Areas.Keys)
+            @foreach (var callNumber in Model.ShuffledKeys)
             {
                 <li class="left-list-item list-group-item">@callNumber</li>
             }
         </ul>
 
         <ul id="areas-list" class="description-list list-group horizontal-list" aria-label="Books in this category answer this question." style="margin-top:0rem!important;">
-            @foreach (var description in Model.Areas.Values)
+            @foreach (var description in Model.ShuffledValues)
             {
                 <li class="right-list-item list-group-item" draggable="true">@description</li>
-            }
-
-            @foreach (var extra in Model.Extras)
-            {
-                <li class="right-list-item list-group-item" draggable="true">@extra</li>
-            }
+            }         
         </ul>
     }else
     {
         <ul id="areas-list" class="list-group horizontal-list" style="margin-right: 5rem;margin-top:1.5rem;">
-            @foreach (var callNumber in Model.Areas.Keys)
+            @foreach (var callNumber in Model.ShuffledKeys)
             {
                 <li class="left-list-item list-group-item" draggable="true">@callNumber</li>
-            }
-
-            @foreach (var extra in Model.Extras)
-            {
-                <li class="left-list-item list-group-item">@extra</li>
             }
         </ul>
 
         <ul id="right-list" class="description-list list-group horizontal-list" aria-label="Books in this category answer this question.">
-            @foreach (var description in Model.Areas.Values)
+            @foreach (var description in Model.ShuffledValues)
             {
                 <li class="right-list-item list-group-item" >@description</li>
             }     

@@ -123,18 +123,22 @@ function handleSubmit() {
     var rightList = null;
     var rightListItems = null;
 
+    //The name of the list differs depending on what the user is matching
     if (mode === "Call Numbers to Description") {
         leftList = document.getElementById('leftlist');
         leftListItems = Array.from(leftList.querySelectorAll('.left-list-item')).map(li => li.textContent);
+
         rightList = document.getElementById('areas-list');
         rightListItems = Array.from(rightList.querySelectorAll('.right-list-item')).map(li => li.textContent);
     } else {
         leftList = document.getElementById('areas-list');
         leftListItems = Array.from(leftList.querySelectorAll('.left-list-item')).map(li => li.textContent);
+
         rightList = document.getElementById('right-list');
         rightListItems = Array.from(rightList.querySelectorAll('.right-list-item')).map(li => li.textContent);
     }
-    
+
+    //Create a dictionary with the top four items because there are only 4 question and 4 correct answers
     const selectedItemsDictionary = {};
     for (let i = 0; i < 4; i++) {
         const callNumber = leftListItems[i];

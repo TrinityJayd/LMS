@@ -4,29 +4,29 @@
     {
         private Dictionary<string, string> areas;
         private string[] extras;
-        private string[] descriptions;
+        private Dictionary<string, string> descriptions;
         private const int MAX_ITEMS = 4;
         private const int EXTRAS = 3;
 
         public Dictionary<string, string> GenerateAreas(string mode)
         {
             //Set the descriptions
-            SetDescriptions();
+            SetKeysAndDescriptions();
+
             areas = new Dictionary<string, string>();
             extras = new string[EXTRAS];
 
-            //Store the ranges that have already been used to prevent duplicates
-            HashSet<int> usedRanges = new HashSet<int>();
             while (areas.Count < MAX_ITEMS)
             {
-                int callNumber = GetCallNumber();
-                int range = callNumber / 100;
+                int randomIndex = new Random().Next(descriptions.Count);
 
-                //If the range has not been used yet, add it
-                if (!usedRanges.Contains(range))
-                {
-                    SetKeysAndValues(callNumber);
-                    usedRanges.Add(range);
+                //Get a random pair
+                var randomPair = descriptions.ElementAt(randomIndex);
+
+                //If the pair has not been used yet, add it
+                if (!areas.ContainsKey(randomPair.Key))
+                {                 
+                    areas.Add(randomPair.Key, randomPair.Value);
                 }
 
             }
@@ -38,18 +38,16 @@
                 int count = 0;
                 while (count < EXTRAS)
                 {
-                    var random = new Random();
-                    int randPosition = random.Next(0, 10);
+                    int randomIndex = new Random().Next(descriptions.Count);
 
-                    string description = descriptions[randPosition];
+                    var randomPair = descriptions.ElementAt(randomIndex);
 
                     //If the description is not already in the dictionary then add it to the extras
-                    if (!areas.ContainsValue(description))
+                    if (!areas.ContainsValue(randomPair.Value))
                     {
-
                         //Check if the extras array has this description
-                        if (!extras.Contains(description)) {
-                            extras[count] = description;
+                        if (!extras.Contains(randomPair.Value)) {
+                            extras[count] = randomPair.Value;
                             count++;
                         }
                             
@@ -62,15 +60,18 @@
                 int count = 0;
                 while (count < EXTRAS)
                 {
-                    int callNumber = GetCallNumber();
-                    int range = callNumber / 100;
+                    int randomIndex = new Random().Next(descriptions.Count);
 
-                    //If the range has not been used yet, add it to the extras
-                    if (!usedRanges.Contains(range))
+                    var randomPair = descriptions.ElementAt(randomIndex);
+
+                    //If the pair has not been used yet, add it to the extras
+                    if (!areas.ContainsKey(randomPair.Key))
                     {
-                        extras[count] = AddZeros(callNumber);
-                        usedRanges.Add(range);
-                        count++;
+                        if (!extras.Contains(randomPair.Key))
+                        {
+                            extras[count] = randomPair.Key;
+                            count++;
+                        }                      
                     }
                 }
             }
@@ -83,104 +84,26 @@
             return extras;
         }
 
-        private void SetKeysAndValues(int callNumber)
-        {
-            //Set the keys and values based on the call number range
-            switch (callNumber)
-            {
-                case int num when (num >= 0 && num < 100):
-                    string number = AddZeros(num);
-                    string description = descriptions[0];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 100 && num < 200):
-                    number = AddZeros(num);
-                    description = descriptions[1];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 200 && num < 300):
-                    number = AddZeros(num);
-                    description = descriptions[2];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 300 && num < 400):
-                    number = AddZeros(num);
-                    description = descriptions[3];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 400 && num < 500):
-                    number = AddZeros(num);
-                    description = descriptions[4];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 500 && num < 600):
-                    number = AddZeros(num);
-                    description = descriptions[5];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 600 && num < 700):
-                    number = AddZeros(num);
-                    description = descriptions[6];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 700 && num < 800):
-                    number = AddZeros(num);
-                    description = descriptions[7];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 800 && num < 900):
-                    number = AddZeros(num);
-                    description = descriptions[8];
-                    areas.Add(number, description);
-                    break;
-                case int num when (num >= 900 && num < 1000):
-                    number = AddZeros(num);
-                    description = descriptions[9];
-                    areas.Add(number, description);
-                    break;
+       
 
-            }
-        }
-
-        private int GetCallNumber()
-        {
-            var random = new Random();
-            return random.Next(0, 1000);
-        }
-
-        private string AddZeros(int number)
-        {
-            if (number < 10)
-            {
-                return "00" + number.ToString();
-            }
-            else if (number < 100)
-            {
-                return "0" + number.ToString();
-            }
-            else
-            {
-                return number.ToString();
-            }
-        }
-
-        private string[] SetDescriptions()
+        private Dictionary<string, string> SetKeysAndDescriptions()
         {
             // Descriptions Attribution
             // Link: https://snicket.fandom.com/wiki/Dewey_Decimal_System?file=Screen_Shot_2019-01-23_at_10.13.11_PM.png
-            descriptions = new string[]
+            descriptions = new Dictionary<string, string>
             {
-                "How do we organize information?",
-                "Who am I?",
-                "How did we get here?",
-                "Who are the people around me?",
-                "How can I communicate with others?",
-                "How can I explain the world around me?",
-                "How can I control the world around me?",
-                "How can I enjoy my free time?",
-                "What are the stories of our lives?",
-                "What was the world like in the past? What is it like now?",
+                { "000", "How do we organize information?" },
+                { "100", "Who am I?" },
+                { "200", "How did we get here?" },
+                { "300", "Who are the people around me?" },
+                { "400", "How can I communicate with others?" },
+                { "500", "How can I explain the world around me?" },
+                { "600", "How can I control the world around me?" },
+                { "700", "How can I enjoy my free time?" },
+                { "800", "What are the stories of our lives?" },
+                { "900", "What was the world like in the past? What is it like now?" }
             };
+
 
             return descriptions;
         }
