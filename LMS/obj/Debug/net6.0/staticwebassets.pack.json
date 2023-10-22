@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\images\\stack-of-books.png"
     },
     {
+      "Id": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\IdentifyingAreas.js",
+      "PackagePath": "staticwebassets\\js\\IdentifyingAreas.js"
+    },
+    {
       "Id": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

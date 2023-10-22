@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "A2BBh/QrpXu5/KgxniHnAU+couwRLH7nptzofwE728E=",
+  "Hash": "IOPQTpi8CzuDKwRFXTn23WlHPr4fCHbciAq/ZR8ejTo=",
   "Source": "LMS",
   "BasePath": "_content/LMS",
   "Mode": "Default",
@@ -168,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\stack-of-books.png"
+    },
+    {
+      "Identity": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\IdentifyingAreas.js",
+      "SourceId": "LMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\",
+      "BasePath": "_content/LMS",
+      "RelativePath": "js/IdentifyingAreas.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\IdentifyingAreas.js"
     },
     {
       "Identity": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\site.js",
