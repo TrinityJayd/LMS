@@ -47,8 +47,13 @@
                     //If the description is not already in the dictionary then add it to the extras
                     if (!areas.ContainsValue(description))
                     {
-                        extras[count] = description;
-                        count++;
+
+                        //Check if the extras array has this description
+                        if (!extras.Contains(description)) {
+                            extras[count] = description;
+                            count++;
+                        }
+                            
                     }
                 }
             }
@@ -178,6 +183,21 @@
             };
 
             return descriptions;
+        }
+
+        public Dictionary<string, string> GameLevelDescription()
+        {
+            //create a dictionary where the key is the level name and the description is the value
+            Dictionary<string, string> levels = new Dictionary<string, string>
+            {
+                { "Beginner", "Match the call numbers and descriptions without a timer." },
+                { "Intermediate", "Match the call numbers and descriptions within 40 seconds." },
+                { "Challenger", "Match the call numbers and descriptions within 35 seconds." },
+                { "Expert", "Master matching the call numbers and descriptions within 25 seconds." }
+
+            };
+
+            return levels;
         }
     }
 

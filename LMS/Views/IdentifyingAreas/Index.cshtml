@@ -1,85 +1,80 @@
 ﻿@model LMS.Models.IdentifyingAreasModel
 
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "Identifying Areas";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var levelData = ViewBag.Levels;
+
 }
 
-<!-- Call Numbers List -->
-<ul id="callNumbersList" class="list-group">
-    @foreach (var callNumber in Model.Areas.Keys)
-    {
-        <li class="callNumberItem list-group-item">@callNumber</li>
-    }
-</ul>
+<h1 class="page-headings">Match The Call Numbers to the Descriptions.</h1>
+<h4 style="color: #457EAC; margin-top: 1rem;text-align:center;">Drag the boxes on the right up or down to match the position of the boxes on the left.</h4>
 
-<!-- Descriptions List -->
-<ul id="descriptionsList" class="list-group">
-    @foreach (var description in Model.Areas.Values)
-    {
-        <li class="descriptionItem list-group-item">@description</li>
-    }
+<div class="d-flex level-info-container">
+    <select class="custom-select" id="level-select">
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Challenger">Challenger</option>
+        <option value="Expert">Expert</option>
+    </select>
 
-    @foreach (var extra in Model.Extras)
-    {
-        <li class="descriptionItem list-group-item">@extra</li>
-    }
+    <button id="info" type="button" class="info-btn" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-container="body" data-bs-title="How to play">ℹ️</button>
 
-</ul>
+    <div style="text-align:center; margin: auto 0rem;">
+        <button id="start-btn">Start</button>
+    </div>
 
+
+    <div id="timer-container" class="countdown">
+        <span id="timer"></span>
+    </div>
+
+</div>
+
+
+<div class="lists-container">
+    <ul id="leftlist" class="list-group horizontal-list" style="margin-right: 5rem;">
+        @foreach (var callNumber in Model.Areas.Keys)
+        {
+            <li class="left-list-item list-group-item">@callNumber</li>
+        }
+    </ul>
+
+    <ul id="right-sortable-list" class="list-group horizontal-list">
+        @foreach (var description in Model.Areas.Values)
+        {
+            <li class="right-list-item list-group-item" draggable="true">@description</li>
+        }
+
+        @foreach (var extra in Model.Extras)
+        {
+            <li class="right-list-item list-group-item" draggable="true">@extra</li>
+        }
+    </ul>
+</div>
+
+<div class="d-flex" style="justify-content: end;">
+    <button id="check-submit-button">Check</button>
+</div>
+
+<div id="result-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="border: none;">
+                <h5 id="outcome" class="modal-title">Modal title</h5>
+                <button id="close-modal1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer" style="border: none;">
+                <button id="close-modal2" type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Call Number item click event handler
-        $('.callNumberItem').click(function() {
-            console.log("clicked");
-            // Remove highlight from previously selected call number
-            $('.callNumberItem.selected').removeClass('selected');
-
-            // Add highlight to the clicked call number
-            $(this).addClass('selected');
-
-            // Check if a description is already selected
-            if ($('.descriptionItem.selected').length > 0) {
-                // Match the selected call number and description
-                matchItems();
-            }
-        });
-
-        // Description item click event handler
-        $('.descriptionItem').click(function() {
-            // Remove highlight from previously selected description
-            $('.descriptionItem.selected').removeClass('selected');
-
-            // Add highlight to the clicked description
-            $(this).addClass('selected');
-
-            // Check if a call number is already selected
-            if ($('.callNumberItem.selected').length > 0) {
-                // Match the selected call number and description
-                matchItems();
-            }
-        });
-
-        // Function to match selected call number and description items
-        function matchItems() {
-            // Get the selected call number and description
-            var selectedCallNumber = $('.callNumberItem.selected').text();
-            var selectedDescription = $('.descriptionItem.selected').text();
-
-            // Assign the same color to the matched pair
-            var color = getRandomColor();
-            $('.callNumberItem.selected').css('background-color', color);
-            $('.descriptionItem.selected').css('background-color', color);
-        }
-
-        // Function to generate a random color
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-    });
+    // Get the levels from the ViewBag and parse them as JSON
+    var levels = @Html.Raw(Json.Serialize(levelData));
 </script>
+<script src="~/js/IdentifyingAreas.js"></script>

@@ -246,3 +246,41 @@ background-color: white;
     color: #457EAC;
     font-weight: 600;
 }
+
+/*Identiyfing Areas */
+
+.list-group-item {
+    border-width: 3px;
+    user-select: none;
+}
+
+.lists-container {
+    display: flex;
+    justify-content: center;
+    margin-top:5rem;
+}
+
+.horizontal-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+    .horizontal-list li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+
+.left-list-item {
+    border-color: #CFBFF7;
+    font-size: 1.1rem;
+}
+
+.right-list-item {
+    border-color: #5DD39E;
+    font-size: 1.1rem;
+}
+
+
