@@ -8,7 +8,6 @@
         private const int MAX_ITEMS = 4;
         private const int EXTRAS = 3;
 
-
         public Dictionary<string, string> GenerateAreas(string mode)
         {
             //Set the descriptions
@@ -71,6 +70,7 @@
                     {
                         extras[count] = AddZeros(callNumber);
                         usedRanges.Add(range);
+                        count++;
                     }
                 }
             }
@@ -198,6 +198,13 @@
             };
 
             return levels;
+        }
+
+        public bool CheckUserDictionary(Dictionary<string, string> correctAreas, Dictionary<string, string> userAreas)
+        {
+            // Code Attribution
+            // Link: https://www.tutorialspoint.com/check-if-two-dictionary-objects-are-equal-in-chash#:~:text=In%20C%23%2C%20you%20can%20check,order%20of%20key%2Dvalue%20pairs.
+            return correctAreas.OrderBy(x => x.Key).SequenceEqual(userAreas.OrderBy(x => x.Key));
         }
     }
 

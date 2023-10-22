@@ -2,6 +2,7 @@
 using LMS_Management.IdentifyingAreas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging.Rules;
 using System.Text.RegularExpressions;
 
 namespace LMS.Controllers
@@ -10,38 +11,35 @@ namespace LMS.Controllers
     {
         private IdentifyingAreas identifyingAreas = new IdentifyingAreas();
         private Dictionary<string, string> levels = new Dictionary<string, string>();
+        private static Dictionary<string, string>  areas = new Dictionary<string, string>();
+        private string mode = "";
 
         public ActionResult Index()
         {
             levels = identifyingAreas.GameLevelDescription();
             ViewBag.Levels = levels;
+
+            mode = HttpContext.Session.GetString("Mode");
+            if (string.IsNullOrEmpty(mode))
+            {
+                mode = "Call Numbers to Description";
+                HttpContext.Session.SetString("Mode", mode); 
+            }
+
             IdentifyingAreasModel areasModel = new IdentifyingAreasModel();
-            areasModel.Areas = identifyingAreas.GenerateAreas("Call Numbers to Description");
+            areas = identifyingAreas.GenerateAreas(mode);
+            areasModel.Areas = areas;
             areasModel.Extras = identifyingAreas.GetExtras();
+            areasModel.Mode = mode;
+            
             return View(areasModel);
         }
 
         [HttpPost]
         public IActionResult SubmitSortedItems([FromBody] Dictionary<string, string> userAreas)
         {
-            //convert the array to a list
-            var items = userAreas;
-
-            //When the list is retrieved it has some extra characters so we need to remove them
-            //List<string> extractedNumbers = userAreas
-            //.Select(item =>
-            //{
-            //    // Match numbers (with optional period and exactly 2 digits after the period) followed by 3 letters
-            //    MatchCollection matches = Regex.Matches(item, @"\d+(\.\d{2})? [A-Z]{3}");
-
-            //    // Join the matched numbers into a single string
-            //    return string.Join(" ", matches.Cast<Match>().Select(match => match.Value));
-            //})
-            //.ToList();
-
-            //check the order of the items
-            //var outcome = game.CheckOrder(extractedNumbers, callNumbers);
-            var outcome = true;
+            
+            var outcome = identifyingAreas.CheckUserDictionary(areas, userAreas);
 
             var result = "Lose";
 
@@ -49,9 +47,24 @@ namespace LMS.Controllers
             {
                 result = "Win";
             }
-
-
+            ChangeMode();
             return Ok(result);
+        }
+
+        private void ChangeMode()
+        {
+            // Update the mode in the session
+            mode = HttpContext.Session.GetString("Mode");
+            if (mode == "Call Numbers to Description")
+            {
+                HttpContext.Session.SetString("Mode", "Descriptions to Call Numbers");
+            }
+            else
+            {
+                HttpContext.Session.SetString("Mode", "Call Numbers to Description");
+            }
+
+            
         }
     }
 }

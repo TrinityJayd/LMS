@@ -53,7 +53,7 @@ document.addEventListener('click', (e) => {
 
 
 
-const list = document.getElementById('right-sortable-list');
+const list = document.getElementById('areas-list');
 let draggingElement = null;
 
 // Attach the dragstart event listener to the list element
@@ -118,19 +118,30 @@ function handleSubmit() {
     const sortedItems = Array.from(list.children).map(li => li.textContent);
 
     // Send the sortedItems to the server using a POST request
-    const leftList = document.getElementById('leftlist');
-    const leftListItems = Array.from(leftList.querySelectorAll('.left-list-item')).map(li => li.textContent);
-    const rightSortableList = document.getElementById('right-sortable-list');
-    const rightSortableListItems = Array.from(rightSortableList.querySelectorAll('.right-list-item')).map(li => li.textContent);
+    var leftList = null;
+    var leftListItems = null;
+    var rightList = null;
+    var rightListItems = null;
 
+    if (mode === "Call Numbers to Description") {
+        leftList = document.getElementById('leftlist');
+        leftListItems = Array.from(leftList.querySelectorAll('.left-list-item')).map(li => li.textContent);
+        rightList = document.getElementById('areas-list');
+        rightListItems = Array.from(rightList.querySelectorAll('.right-list-item')).map(li => li.textContent);
+    } else {
+        leftList = document.getElementById('areas-list');
+        leftListItems = Array.from(leftList.querySelectorAll('.left-list-item')).map(li => li.textContent);
+        rightList = document.getElementById('right-list');
+        rightListItems = Array.from(rightList.querySelectorAll('.right-list-item')).map(li => li.textContent);
+    }
+    
     const selectedItemsDictionary = {};
     for (let i = 0; i < 4; i++) {
         const callNumber = leftListItems[i];
-        const description = rightSortableListItems[i];
+        const description = rightListItems[i];
         selectedItemsDictionary[callNumber] = description;
     }
 
-    console.log(selectedItemsDictionary);
 
     // Send the selectedItems to the server using a POST request
     fetch('/IdentifyingAreas/SubmitSortedItems', {

@@ -7,8 +7,14 @@
 
 }
 
-<h1 class="page-headings">Match The Call Numbers to the Descriptions.</h1>
-<h4 style="color: #457EAC; margin-top: 1rem;text-align:center;">Drag the boxes on the right up or down to match the position of the boxes on the left.</h4>
+@if (Model.Mode.Equals("Call Numbers to Description"))
+{
+    <h1 class="page-headings">Match The Call Numbers to the Descriptions.</h1>
+    <h4 style="color: #457EAC; margin-top: 1rem;text-align:center;">Drag the boxes on the right up or down to match the position of the boxes on the left.</h4>
+}else{
+    <h1 class="page-headings">Match The Descriptions to the Call Numbers.</h1>
+    <h4 style="color: #457EAC; margin-top: 1rem;text-align:center;">Drag the boxes on the left up or down to match the position of the boxes on the right.</h4>
+}
 
 <div class="d-flex level-info-container">
     <select class="custom-select" id="level-select">
@@ -24,7 +30,6 @@
         <button id="start-btn">Start</button>
     </div>
 
-
     <div id="timer-container" class="countdown">
         <span id="timer"></span>
     </div>
@@ -33,24 +38,49 @@
 
 
 <div class="lists-container">
-    <ul id="leftlist" class="list-group horizontal-list" style="margin-right: 5rem;">
-        @foreach (var callNumber in Model.Areas.Keys)
-        {
-            <li class="left-list-item list-group-item">@callNumber</li>
-        }
-    </ul>
+    @if (Model.Mode.Equals("Call Numbers to Description"))
+    {
+        <ul id="leftlist" class="list-group horizontal-list" style="margin-right: 5rem;margin-top: 1.5rem;">
+            @foreach (var callNumber in Model.Areas.Keys)
+            {
+                <li class="left-list-item list-group-item">@callNumber</li>
+            }
+        </ul>
 
-    <ul id="right-sortable-list" class="list-group horizontal-list">
-        @foreach (var description in Model.Areas.Values)
-        {
-            <li class="right-list-item list-group-item" draggable="true">@description</li>
-        }
+        <ul id="areas-list" class="description-list list-group horizontal-list" aria-label="Books in this category answer this question." style="margin-top:0rem!important;">
+            @foreach (var description in Model.Areas.Values)
+            {
+                <li class="right-list-item list-group-item" draggable="true">@description</li>
+            }
 
-        @foreach (var extra in Model.Extras)
-        {
-            <li class="right-list-item list-group-item" draggable="true">@extra</li>
-        }
-    </ul>
+            @foreach (var extra in Model.Extras)
+            {
+                <li class="right-list-item list-group-item" draggable="true">@extra</li>
+            }
+        </ul>
+    }else
+    {
+        <ul id="areas-list" class="list-group horizontal-list" style="margin-right: 5rem;margin-top:1.5rem;">
+            @foreach (var callNumber in Model.Areas.Keys)
+            {
+                <li class="left-list-item list-group-item" draggable="true">@callNumber</li>
+            }
+
+            @foreach (var extra in Model.Extras)
+            {
+                <li class="left-list-item list-group-item">@extra</li>
+            }
+        </ul>
+
+        <ul id="right-list" class="description-list list-group horizontal-list" aria-label="Books in this category answer this question.">
+            @foreach (var description in Model.Areas.Values)
+            {
+                <li class="right-list-item list-group-item" >@description</li>
+            }     
+        </ul>
+
+    }
+
 </div>
 
 <div class="d-flex" style="justify-content: end;">
@@ -76,5 +106,6 @@
 <script>
     // Get the levels from the ViewBag and parse them as JSON
     var levels = @Html.Raw(Json.Serialize(levelData));
+    var mode = @Html.Raw(Json.Serialize(Model.Mode));
 </script>
 <script src="~/js/IdentifyingAreas.js"></script>
