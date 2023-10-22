@@ -10,6 +10,7 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
 ## Table of Contents
 
 - [Features](#features)
+  - [Updates](#updates)
 - [Usage](#usage-instructions)
    - [Prerequisites](#prerequisites)
    - [Compilation](#compilation)
@@ -24,11 +25,45 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
      - Finding call numbers.
    - For now, only the "Replacing books" task is implemented.
 
+
 2. **Replacing Books:**
    - When the user selects "Replacing books," the application randomly generates 10 different call numbers and displays them to the user.
    - Users can reorder the call numbers in ascending order.
    - The application checks whether the user placed the call numbers in the correct ascending order.
    - Different levels are included to motivate users to continue learning.
+
+### Updates
+
+1. **Enabling the Identifying Areas Task**
+   - In this update, the "Identifying Areas" task is enabled.
+
+   
+2. **User-Friendly Interface for Matching Columns**
+   - Upon selecting the "Identifying Areas" task, users will encounter an intuitive user interface. The interface allows users to engage in a column-matching challenge involving call numbers (top level only) and descriptions.
+
+
+3. **User-Driven Questions**
+   - Users now have the freedom to answer as many questions as they desire.
+
+  
+4. **Alternating Question Types**
+   - They alternate between matching descriptions to call numbers and call numbers to descriptions.
+
+
+5. **Randomized Item Selection**
+   - Each question is a unique challenge with four randomly selected items in the first column.
+   - The second column presents seven potential answers, including three incorrect ones, offering a dynamic and engaging experience.
+
+  
+   **Note: In this context, a "question" encompasses the entire column-matching set, including both columns.**
+
+
+6. **Gamification for User Motivation**
+   - The timer and levels have been reused for gamification
+
+  
+7. **Efficient Data Storage**
+   -Call numbers and their corresponding descriptions are efficiently stored in a dictionary, ensuring optimal data management and retrieval.
 
 
 ## Usage Instructions
