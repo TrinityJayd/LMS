@@ -1,0 +1,44 @@
+﻿@model LMS.Models.FindingCallNumbers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Nodes</title>
+    <style>
+        .node {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="level1" class="node">@Model.Question</div>
+    <div id="level2" class="node">
+        @foreach(var item in Model.FirstLevel)
+        {
+            <p>@item.Number     @item.Description</p>
+        }
+    </div>
+    <div id="level3" class="node">
+        @foreach (var item in Model.SecondLevel)
+        {
+            <p>@item.Number     @item.Description</p>
+        }
+    </div>
+    <div id="level4" class="node">
+        @foreach (var item in Model.ThirdLevel)
+        {
+            <p>@item.Number     @item.Description</p>
+        }
+    </div>
+
+</body>
+</html>
+
+

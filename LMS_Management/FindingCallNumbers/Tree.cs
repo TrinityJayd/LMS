@@ -66,45 +66,44 @@ namespace LMS_Management.FindingCallNumbers
         }
 
         // Get path to a node
-        public List<T> GetPathToRandomNode(T value)
+        public List<T> GetPathToRandomNode(Node<T> Start, int limit)
         {
-            Node<T> node = FindNode(value);
-            if (node == null)
-            {
-                return null; // Node not found
-            }
-
             List<T> path = new List<T>();
-            GetPathToNode(Root, node, path);
-            return path;
+            return PathToRandom(Start, 0, path, limit);
         }
 
-        private bool GetPathToNode(Node<T> current, Node<T> target, List<T> path)
+        private List<T> PathToRandom(Node<T> start, int count, List<T> path, int limit)
         {
-            if (current == null)
+            if (count >= limit || start.Children.Count == 0)
             {
-                return false;
+                return path;
             }
-
-            if (current.Equals(target))
+            else
             {
-                path.Add(current.Value);
-                return true;
-            }
+                Node<T> current = start;
 
-            path.Add(current.Value);
+                Random r = new Random(); // Initialize a single Random instance outside the loop
 
-            foreach (Node<T> child in current.Children)
-            {
-                if (GetPathToNode(child, target, path))
+                while (count < limit && current.Children.Count > 0)
                 {
-                    return true;
-                }
-            }
+                    int index = r.Next(current.Children.Count);
 
-            path.RemoveAt(path.Count - 1);
-            return false;
+                    Node<T> selectedChild = current.Children[index];
+
+                    if (!path.Contains(selectedChild.Value)) // Ensure uniqueness
+                    {
+                        path.Add(selectedChild.Value);
+                        count++;
+
+                        // Recursively traverse to the next level
+                        return PathToRandom(selectedChild, count, path, limit);
+                    }
+                }
+
+                return path; // Return the path after traversing
+            }
         }
+
 
         public T GetRandom(int level)
         {

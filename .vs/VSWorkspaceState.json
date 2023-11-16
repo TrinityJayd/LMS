@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\LMS",
-    "\\LMS\\Views",
+    "\\LMS\\Controllers",
     "\\LMS\\Views\\ReplaceBooks"
   ],
-  "SelectedNode": "\\LMS\\Views\\ReplaceBooks\\Index.cshtml",
+  "SelectedNode": "\\LMS\\Controllers\\ReplaceBooksController.cs",
   "PreviewInSolutionExplorer": false
 }
