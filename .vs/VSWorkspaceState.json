@@ -3,8 +3,11 @@
     "",
     "\\LMS",
     "\\LMS\\Controllers",
-    "\\LMS\\Views\\ReplaceBooks"
+    "\\LMS\\Views",
+    "\\LMS\\Views\\FindingCallNumbers",
+    "\\LMS_Management",
+    "\\LMS_Management\\FindingCallNumbers"
   ],
-  "SelectedNode": "\\LMS\\Controllers\\ReplaceBooksController.cs",
+  "SelectedNode": "\\LMS_Management\\FindingCallNumbers\\CreateTreeFile.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -8,35 +8,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Display Nodes</title>
-    <style>
-        .node {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 5px;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#level2, #level3').hide(); // Initially hide level 2 and level 3 forms
+
+            $('form').submit(function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Get the selected value
+                var selectedValue = $(this).find('input[name="selectedOption"]:checked').val();
+                var level = $(this).data('level');
+                var form = this; // Store the form context
+
+                // AJAX call to the Check method
+                $.ajax({
+                    type: 'POST',
+                    url: 'FindingCallNumbers/Check',
+                    data: { selectedOption: selectedValue, level: level },
+                    success: function (result) {
+                        if (result === true) {
+                            $(form).hide();
+                            $(form).next('form').show();
+                            
+                        } else {
+                            alert('Incorrect selection'); // Handle incorrect selection
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    
 </head>
 <body>
-    <div id="level1" class="node">@Model.Question</div>
-    <div id="level2" class="node">
-        @foreach(var item in Model.FirstLevel)
-        {
-            <p>@item.Number     @item.Description</p>
-        }
-    </div>
-    <div id="level3" class="node">
-        @foreach (var item in Model.SecondLevel)
-        {
-            <p>@item.Number     @item.Description</p>
-        }
-    </div>
-    <div id="level4" class="node">
-        @foreach (var item in Model.ThirdLevel)
-        {
-            <p>@item.Number     @item.Description</p>
-        }
-    </div>
+    <div id="question" class="node">@Model.Question</div>
+    <form method="post" asp-action="Check" id="level1" data-level="0">
+        <div class="node">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                @foreach (var item in Model.FirstLevel)
+                {
+                    <input type="radio" class="btn-check" name="selectedOption" id="@("btnradio" + item.Number)" value="@item.Number:@item.Description" autocomplete="off">
+                    <label class="btn btn-outline-success" for="@("btnradio" + item.Number)">
+                        @item.Number @item.Description
+                    </label>
+                }
+            </div>
+            <input type="submit" class="btn btn-success check-level" value="Check" />
+        </div>
+    </form>
+
+    <form method="post" action="Check" id="level2" data-level="1">
+        <div  class="node">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                @foreach (var item in Model.SecondLevel)
+                {
+                    <input type="radio" class="btn-check" name="selectedOption" id="@("btnradio" + item.Number)" value="@item.Number @item.Description" autocomplete="off">
+                    <label class="btn btn-outline-success" for="@("btnradio" + item.Number)">
+                        @item.Number @item.Description
+                    </label>
+                }
+            </div>
+            <input type="submit" class="btn btn-success check-level" value="Check" />
+        </div>
+    </form>
+
+    <form method="post" action="Check" id="level3" data-level="2">
+        <div class="node">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                @foreach (var item in Model.ThirdLevel)
+                {
+                    <input type="radio" class="btn-check" name="selectedOption" id="@("btnradio" + item.Number)" value="@item.Number @item.Description" autocomplete="off">
+                    <label class="btn btn-outline-success" for="@("btnradio" + item.Number)">
+                        @item.Number @item.Description
+                    </label>
+                }
+            </div>
+            <input type="submit" class="btn btn-success check-level" value="Check" />
+        </div>
+    </form>
+
 
 </body>
 </html>

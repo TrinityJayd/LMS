@@ -12,6 +12,9 @@ namespace LMS.Controllers
         private int THIRD_LEVEL = 2;
         private int depth = 3;
         private Tree<Pair> gameTree;
+        private List<Pair>? correctNode;
+
+
         public IActionResult Index()
         {
             CreateTreeFile treeFile = new CreateTreeFile();
@@ -28,7 +31,7 @@ namespace LMS.Controllers
                 gameTree = treeFile.ReadFile();
             }
 
-            var correctNode = gameTree.GetPathToRandomNode(gameTree.Root, depth);
+            correctNode = gameTree.GetPathToRandomNode(gameTree.Root, depth);
 
             var incorrectNodePath1 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
             while (incorrectNodePath1[TOP_LEVEL] == correctNode[TOP_LEVEL])
@@ -77,6 +80,14 @@ namespace LMS.Controllers
                 return randomChildren;
             }
         }
+
+        public IActionResult Check(string selectedOption, string level)
+        {
+            int numLevel = Convert.ToInt32(level);
+            return Json(true);
+        }
+
+        
 
 
     }
