@@ -10,7 +10,8 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
 ## Table of Contents
 
 - [Features](#features)
-  - [Updates](#updates)
+  - [Updates Part 2](#updates-part-2)
+  - [Updates Part 3](#updates-part-3)
 - [Usage](#usage-instructions)
    - [Prerequisites](#prerequisites)
    - [Compilation](#compilation)
@@ -33,8 +34,8 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
    - The application checks whether the user placed the call numbers in the correct ascending order.
    - Different levels are included to motivate users to continue learning.
 
-### Updates
-
+### Updates Part 2
+----
 1. **Enabling the Identifying Areas Task**
    - In this update, the "Identifying Areas" task is enabled.
 
@@ -64,7 +65,21 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
 
   
 7. **Efficient Data Storage**
-   -Call numbers and their corresponding descriptions are efficiently stored in a dictionary, ensuring optimal data management and retrieval.
+   - Call numbers and their corresponding descriptions are efficiently stored in a dictionary, ensuring optimal data management and retrieval.
+
+### Updates Part 3
+----
+1. **Incorporation of Finding Call Numbers Task**
+    - Enabled the "Finding Call Numbers" task, allowing users to delve into the hierarchical Dewey Decimal classification system.
+
+2. **Dynamic Quiz Structure**
+    - Created a quiz mechanism where users encounter third-level entries, select from top-level options, and progress based on correct answers.
+
+3. **Memory Loading of Dewey Decimal Data**
+    - Implemented loading of Dewey Decimal classification data into application memory from a JSON file, ensuring efficient data access.
+
+4. **Tree-Based Data Storage**
+    - Utilized a tree structure to efficiently store and manage Dewey Decimal classification data within the application.
 
 
 ## Usage Instructions
@@ -106,10 +121,34 @@ To compile and run the Dewey Decimal System Training Application, follow these s
 
 ## Screenshots
 
-<img src="Demo Images/image1.png" alt="Game 1" width="800" height="600" />
+
+**Landing Page**
 
 
-<img src="Demo Images/image2.png" alt="Game 2" width="800" height="600" />
+<img src="Demo Images/landing.png" alt="Game 1" width="800" height="600" />
 
+
+**Options**
+
+
+<img src="Demo Images/options.png" alt="Game 1" width="800" height="600" />
+
+
+**Sort Call Numbers Page**
+
+
+<img src="Demo Images/sorting.png" alt="Game 1" width="800" height="600" />
+
+
+**Identifying Areas Page**
+
+
+<img src="Demo Images/identifying.png" alt="Game 1" width="800" height="600" />
+
+
+**Finding Call Numbers Page**
+
+
+<img src="Demo Images/finding.png" alt="Game 1" width="800" height="600" />
 
 [🔝 Back to Top](#lms)
