@@ -1,9 +1,6 @@
 ﻿using LMS.Models;
 using LMS_Management.IdentifyingAreas;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Packaging.Rules;
-using System.Text.RegularExpressions;
 
 namespace LMS.Controllers
 {
@@ -11,7 +8,7 @@ namespace LMS.Controllers
     {
         private IdentifyingAreas identifyingAreas = new IdentifyingAreas();
         private Dictionary<string, string> levels = new Dictionary<string, string>();
-        private static Dictionary<string, string>  areas = new Dictionary<string, string>();
+        private static Dictionary<string, string> areas = new Dictionary<string, string>();
         private string mode = "";
 
         public ActionResult Index()
@@ -24,7 +21,7 @@ namespace LMS.Controllers
             if (string.IsNullOrEmpty(mode))
             {
                 mode = "Call Numbers to Description";
-                HttpContext.Session.SetString("Mode", mode); 
+                HttpContext.Session.SetString("Mode", mode);
             }
 
             IdentifyingAreasModel areasModel = new IdentifyingAreasModel();
@@ -56,15 +53,15 @@ namespace LMS.Controllers
                 areasModel.ShuffledKeys = shuffledKeys;
                 return View(areasModel);
             }
-            
 
-            
+
+
         }
 
         [HttpPost]
         public IActionResult SubmitSortedItems([FromBody] Dictionary<string, string> userAreas)
         {
-            
+
             var outcome = identifyingAreas.CheckUserDictionary(areas, userAreas);
 
             var result = "Lose";
@@ -90,7 +87,7 @@ namespace LMS.Controllers
                 HttpContext.Session.SetString("Mode", "Call Numbers to Description");
             }
 
-            
+
         }
     }
 }

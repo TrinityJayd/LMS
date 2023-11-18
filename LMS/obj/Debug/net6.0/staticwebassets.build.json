@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IOPQTpi8CzuDKwRFXTn23WlHPr4fCHbciAq/ZR8ejTo=",
+  "Hash": "IHFfHGN0eHla9F4fFDgpywuy2bPA457OHQGK6pl+QTU=",
   "Source": "LMS",
   "BasePath": "_content/LMS",
   "Mode": "Default",
@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\IdentifyingAreas.js"
+    },
+    {
+      "Identity": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\IdentifyingCallNumbers.js",
+      "SourceId": "LMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\",
+      "BasePath": "_content/LMS",
+      "RelativePath": "js/IdentifyingCallNumbers.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\IdentifyingCallNumbers.js"
     },
     {
       "Identity": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\site.js",

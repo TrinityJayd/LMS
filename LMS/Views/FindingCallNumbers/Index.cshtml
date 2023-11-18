@@ -1,0 +1,98 @@
+﻿@model LMS.Models.FindingCallNumbers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <h1 class="page-headings" style="color: #457EAC;">Finding Call Numbers</h1>
+    <h4 style="color: #457EAC; margin-top: 1rem;text-align:center;">Select the correct category from the options provided to reach the most detailed classification.</h4>
+
+    <div class="d-flex level-info-container">
+        <select class="custom-select" id="level-select">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Challenger">Challenger</option>
+            <option value="Expert">Expert</option>
+        </select>
+
+        <button id="info" type="button" class="info-btn" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-container="body" data-bs-title="How to play">ℹ️</button>
+
+        <div style="text-align:center; margin: auto 0rem;">
+            <button id="start-btn">Start</button>
+        </div>
+
+        <div id="timer-container" class="countdown">
+            <span id="timer"></span>
+        </div>
+
+    </div>
+    
+
+    <div id="question" class="node">
+        <h5 class="text-success">Third level: @Model.Question</h5>
+    </div>
+    <form method="post" asp-action="Check" id="level1" data-level="0">
+        <div class="node">
+            <div class="btn-group" role="group" aria-label="Level 1 button group">
+                @foreach (var item in Model.FirstLevel)
+                {
+                    <input type="radio" class="btn-check" name="selectedOption" id="@("btnradio" + item.Number)" value="@item.Number:@item.Description" autocomplete="off">
+                    <label class="btn btn-outline-success" for="@("btnradio" + item.Number)">
+                        @item.Number @item.Description
+                    </label>
+                }
+            </div>
+            <input type="submit" class="btn btn-success check-level" value="Check" />
+        </div>
+    </form>
+
+    <form method="post" action="Check" id="level2" data-level="1">
+        <div  class="node">
+            <div class="btn-group" role="group" aria-label="Level 2 button group">
+                @foreach (var item in Model.SecondLevel)
+                {
+                    <input type="radio" class="btn-check" name="selectedOption" id="@("btnradio" + item.Number)" value="@item.Number:@item.Description" autocomplete="off">
+                    <label class="btn btn-outline-success" for="@("btnradio" + item.Number)">
+                        @item.Number @item.Description
+                    </label>
+                }
+            </div>
+            <input type="submit" class="btn btn-success check-level" value="Check" />
+        </div>
+    </form>
+
+    <form method="post" action="Check" id="level3" data-level="2">
+        <div class="node">
+            <div class="btn-group" role="group" aria-label=Level 3 button group">
+                @foreach (var item in Model.ThirdLevel)
+                {
+                    <input type="radio" class="btn-check" name="selectedOption" id="@("btnradio" + item.Number)" value="@item.Number:@item.Description" autocomplete="off">
+                    <label class="btn btn-outline-success" for="@("btnradio" + item.Number)">
+                        @item.Number @item.Description
+                    </label>
+                }
+            </div>
+            <input type="submit" class="btn btn-success check-level" value="Check" />
+        </div>
+    </form>
+
+    <div id="result-modal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="border: none;">
+                    <h5 id="outcome" class="modal-title">Modal title</h5>
+                    <button id="close-modal1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                    <button id="close-modal2" type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/IdentifyingCallNumbers.js"></script>

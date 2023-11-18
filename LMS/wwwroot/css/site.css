@@ -291,3 +291,14 @@ background-color: white;
     margin-left: -15px;
 }
 
+/*Identifying Call Numbers*/
+
+.check-level{
+    margin-left:2rem;
+}
+
+.node {
+    padding: 10px;
+    margin: 5px;
+    text-align:center;
+}
