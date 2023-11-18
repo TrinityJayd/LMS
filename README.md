@@ -14,6 +14,7 @@ Live site: [Web App](https://lms2023.azurewebsites.net/)
 - [Usage](#usage-instructions)
    - [Prerequisites](#prerequisites)
    - [Compilation](#compilation)
+- [Screenshots](#screenshots)
 
      
 ## Features
@@ -102,6 +103,13 @@ To compile and run the Dewey Decimal System Training Application, follow these s
    ```bash
    dotnet run
    ```
+
+## Screenshots
+
+<img src="Demo Images/image1.png" alt="Game 1" width="800" height="600" />
+
+
+<img src="Demo Images/image2.png" alt="Game 2" width="800" height="600" />
 
 
 [🔝 Back to Top](#lms)
