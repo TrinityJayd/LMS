@@ -36,6 +36,9 @@ namespace LMS_Management.FindingCallNumbers
             }
         }
 
+        //Code Attribution
+        //Link:https://www.geeksforgeeks.org/search-a-node-in-binary-tree/
+        //Author: GeeksforGeeks
         private Node<T> FindNode(T value)
         {
             return FindNode(Root, value);
@@ -65,7 +68,9 @@ namespace LMS_Management.FindingCallNumbers
             return null;
         }
 
-        // Get path to a node
+        // Code Attribution
+        //Link: https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/
+        //Author: GeeksforGeeks
         public List<T> GetPathToRandomNode(Node<T> Start, int limit)
         {
             List<T> path = new List<T>();
@@ -82,7 +87,7 @@ namespace LMS_Management.FindingCallNumbers
             {
                 Node<T> current = start;
 
-                Random r = new Random(); // Initialize a single Random instance outside the loop
+                Random r = new Random(); 
 
                 while (count < limit && current.Children.Count > 0)
                 {
@@ -90,7 +95,7 @@ namespace LMS_Management.FindingCallNumbers
 
                     Node<T> selectedChild = current.Children[index];
 
-                    if (!path.Contains(selectedChild.Value)) // Ensure uniqueness
+                    if (!path.Contains(selectedChild.Value))
                     {
                         path.Add(selectedChild.Value);
                         count++;
@@ -100,24 +105,8 @@ namespace LMS_Management.FindingCallNumbers
                     }
                 }
 
-                return path; // Return the path after traversing
+                return path; 
             }
-        }
-
-
-        public T GetRandom(int level)
-        {
-            Node<T> current = Root;
-
-            for (int i = 0; i < level; i++)
-            {
-                Random r = new Random();
-
-                int index = r.Next(current.Children.Count);
-
-                current = current.Children[index];
-            }
-            return current.Value;
         }
 
         public List<T> GetChildren(T parentValue)

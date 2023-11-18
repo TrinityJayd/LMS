@@ -21,10 +21,12 @@ namespace LMS.Controllers
 
             if (treeFile.FileExists())
             {
+                //If the file exists read the tree
                 gameTree = treeFile.ReadFile();
             }
             else
             {
+                //If the tree data file doesnt exist then create it
                 treeFile.CreateFile();
                 gameTree = treeFile.ReadFile();
             }
@@ -32,6 +34,8 @@ namespace LMS.Controllers
             correctPath = gameTree.GetPathToRandomNode(gameTree.Root, depth);
 
             var incorrectNodePath1 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
+            //Check the uniqueness of the paths so that there are no duplicates
+
             while (incorrectNodePath1[TOP_LEVEL] == correctPath[TOP_LEVEL])
             {
                 incorrectNodePath1 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
@@ -66,6 +70,7 @@ namespace LMS.Controllers
 
         private List<Pair> GetNextLevel(Pair node)
         {
+            //get the children of the parent node
             var children = gameTree.GetChildren(node);
 
             if(children.Count <= 4)
@@ -82,10 +87,12 @@ namespace LMS.Controllers
 
         public IActionResult Check(string selectedOption, string level)
         {
+            //The level tells us what level the node is at
             int numLevel = Convert.ToInt32(level);
 
-            if (!String.IsNullOrEmpty(selectedOption))
+            if (!string.IsNullOrEmpty(selectedOption))
             {
+                //The choice is sent to the controller as a string number:description
                 string[] choice = selectedOption.Split(':');
                 Pair userPair = new Pair()
                 {
