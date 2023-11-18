@@ -23,5 +23,11 @@ namespace LMS_Management.FindingCallNumbers
         {
             return Number.CompareTo(other.Number);
         }
+
+        public bool CompareObj(Pair other)
+        {
+            return this.Number == other.Number  && this.Description == other.Description;
+        }
     }
 }
+

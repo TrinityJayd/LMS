@@ -12,13 +12,11 @@ namespace LMS.Controllers
         private int THIRD_LEVEL = 2;
         private int depth = 3;
         private Tree<Pair> gameTree;
-        private List<Pair>? correctNode;
-
+        private static List<Pair>? correctPath;
 
         public IActionResult Index()
         {
             CreateTreeFile treeFile = new CreateTreeFile();
-
             
 
             if (treeFile.FileExists())
@@ -31,22 +29,22 @@ namespace LMS.Controllers
                 gameTree = treeFile.ReadFile();
             }
 
-            correctNode = gameTree.GetPathToRandomNode(gameTree.Root, depth);
+            correctPath = gameTree.GetPathToRandomNode(gameTree.Root, depth);
 
             var incorrectNodePath1 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
-            while (incorrectNodePath1[TOP_LEVEL] == correctNode[TOP_LEVEL])
+            while (incorrectNodePath1[TOP_LEVEL] == correctPath[TOP_LEVEL])
             {
                 incorrectNodePath1 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
             }
 
             var incorrectNodePath2 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
-            while (incorrectNodePath2[TOP_LEVEL] == correctNode[TOP_LEVEL] || incorrectNodePath2[TOP_LEVEL] == incorrectNodePath1[TOP_LEVEL])
+            while (incorrectNodePath2[TOP_LEVEL] == correctPath[TOP_LEVEL] || incorrectNodePath2[TOP_LEVEL] == incorrectNodePath1[TOP_LEVEL])
             {
                 incorrectNodePath2 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
             }
 
             var incorrectNodePath3 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
-            while (incorrectNodePath3[TOP_LEVEL] == correctNode[TOP_LEVEL] || incorrectNodePath3[TOP_LEVEL] == incorrectNodePath1[TOP_LEVEL] || incorrectNodePath3[TOP_LEVEL] == incorrectNodePath2[TOP_LEVEL])
+            while (incorrectNodePath3[TOP_LEVEL] == correctPath[TOP_LEVEL] || incorrectNodePath3[TOP_LEVEL] == incorrectNodePath1[TOP_LEVEL] || incorrectNodePath3[TOP_LEVEL] == incorrectNodePath2[TOP_LEVEL])
             {
                 incorrectNodePath3 = gameTree.GetPathToRandomNode(gameTree.Root, depth);
             }
@@ -54,13 +52,14 @@ namespace LMS.Controllers
 
             var model = new FindingCallNumbers
             {
-                Question = Convert.ToInt32(correctNode[THIRD_LEVEL].Number),
-                FirstLevel = new List<Pair> { correctNode[TOP_LEVEL], incorrectNodePath1[TOP_LEVEL], incorrectNodePath2[TOP_LEVEL], incorrectNodePath3[TOP_LEVEL] },
-                SecondLevel = GetNextLevel(correctNode[TOP_LEVEL]),
-                ThirdLevel = GetNextLevel(correctNode[SECOND_LEVEL])
+                Question = correctPath[THIRD_LEVEL].Description,
+                FirstLevel = new List<Pair> { correctPath[TOP_LEVEL], incorrectNodePath1[TOP_LEVEL], incorrectNodePath2[TOP_LEVEL], incorrectNodePath3[TOP_LEVEL] },
+                SecondLevel = GetNextLevel(correctPath[TOP_LEVEL]),
+                ThirdLevel = GetNextLevel(correctPath[SECOND_LEVEL])
             };
 
             model.SortLevels();
+            
 
             return View(model);
         }
@@ -75,7 +74,7 @@ namespace LMS.Controllers
             }
             else
             {
-                //Get 4 random children
+                //Get 4 random children 
                 var randomChildren = children.OrderBy(x => Guid.NewGuid()).Take(4).ToList();
                 return randomChildren;
             }
@@ -84,7 +83,42 @@ namespace LMS.Controllers
         public IActionResult Check(string selectedOption, string level)
         {
             int numLevel = Convert.ToInt32(level);
-            return Json(true);
+
+            if (!String.IsNullOrEmpty(selectedOption))
+            {
+                string[] choice = selectedOption.Split(':');
+                Pair userPair = new Pair()
+                {
+                    Number = choice[0],
+                    Description = choice[1]
+                };
+
+                switch (numLevel)
+                {
+                    case 0:
+                        if (correctPath[TOP_LEVEL].CompareObj(userPair))
+                        {
+                            return Json(true);
+                        }
+                        break;
+                    case 1:
+                        if (correctPath[SECOND_LEVEL].CompareObj(userPair))
+                        {
+                            return Json(true);
+                        }
+                        break;
+                    case 2:
+                        if (correctPath[THIRD_LEVEL].CompareObj(userPair))
+                        {
+                            return Json(true);
+                        }
+                        break;
+                    default:
+                        return Json(false);
+                }
+            }
+          
+            return Json(false);
         }
 
         

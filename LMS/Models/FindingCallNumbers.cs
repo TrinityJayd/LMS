@@ -4,7 +4,7 @@ namespace LMS.Models
 {
     public class FindingCallNumbers
     {
-        public int Question { get; set; }
+        public string Question { get; set; }
         public List<Pair> FirstLevel { get; set; }
         public List<Pair> SecondLevel { get; set; }
         public List<Pair> ThirdLevel { get; set; }

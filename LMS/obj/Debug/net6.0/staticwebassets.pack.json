@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\js\\IdentifyingAreas.js"
     },
     {
+      "Id": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\IdentifyingCallNumbers.js",
+      "PackagePath": "staticwebassets\\js\\IdentifyingCallNumbers.js"
+    },
+    {
       "Id": "C:\\Users\\lab_services_student\\source\\repos\\LMS\\LMS\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
