@@ -9,9 +9,8 @@ $(document).ready(function () {
         // Get the selected value
         var selectedValue = $(this).find('input[name="selectedOption"]:checked').val();
         var level = $(this).data('level');
-        var form = this; // Store the form context
+        var form = this;
 
-        // AJAX call to the Check method
         $.ajax({
             type: 'POST',
             url: 'FindingCallNumbers/Check',
@@ -19,6 +18,7 @@ $(document).ready(function () {
             success: function (result) {
                 if (result === true) {
                     if (level != 2) { 
+                        //Hide the current level and show the next level
                         $(form).hide();
                         $(form).next('form').show();
                     } else {

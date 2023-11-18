@@ -251,4 +251,3 @@ C:\Users\lab_services_student\source\repos\LMS\LMS\bin\Debug\net6.0\uk-UA\Kendo.
 C:\Users\lab_services_student\source\repos\LMS\LMS\bin\Debug\net6.0\zh-CN\Kendo.Mvc.resources.dll
 C:\Users\lab_services_student\source\repos\LMS\LMS\bin\Debug\net6.0\LMS_Management.dll
 C:\Users\lab_services_student\source\repos\LMS\LMS\bin\Debug\net6.0\LMS_Management.pdb
-C:\Users\lab_services_student\source\repos\LMS\LMS\bin\Debug\net6.0\Tree.json
