@@ -125,30 +125,30 @@ To compile and run the Dewey Decimal System Training Application, follow these s
 **Landing Page**
 
 
-<img src="Demo Images/landing.png" alt="Game 1" width="800" height="600" />
+<img src="Demo Images/landing.png" alt="Game 1" width="1000" height="600" />
 
 
 **Options**
 
 
-<img src="Demo Images/options.png" alt="Game 1" width="800" height="600" />
+<img src="Demo Images/options.png" alt="Game 1" width="1000" height="600" />
 
 
 **Sort Call Numbers Page**
 
 
-<img src="Demo Images/sorting.png" alt="Game 1" width="800" height="600" />
+<img src="Demo Images/sorting.png" alt="Game 1" width="1000" height="600" />
 
 
 **Identifying Areas Page**
 
 
-<img src="Demo Images/identifying.png" alt="Game 1" width="800" height="600" />
+<img src="Demo Images/identifying.png" alt="Game 1" width="1000" height="600" />
 
 
 **Finding Call Numbers Page**
 
 
-<img src="Demo Images/finding.png" alt="Game 1" width="800" height="600" />
+<img src="Demo Images/finding.png" alt="Game 1" width="1000" height="600" />
 
 [🔝 Back to Top](#lms)
