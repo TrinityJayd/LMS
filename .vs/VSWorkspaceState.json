@@ -2,12 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\LMS",
-    "\\LMS\\Controllers",
-    "\\LMS\\Views",
-    "\\LMS\\Views\\FindingCallNumbers",
-    "\\LMS_Management",
-    "\\LMS_Management\\FindingCallNumbers"
+    "\\LMS\\Controllers"
   ],
-  "SelectedNode": "\\LMS_Management\\FindingCallNumbers\\CreateTreeFile.cs",
+  "SelectedNode": "\\LMS.sln",
   "PreviewInSolutionExplorer": false
 }

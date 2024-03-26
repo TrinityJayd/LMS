@@ -9,53 +9,55 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = LMS
 build_property.RootNamespace = LMS
-build_property.ProjectDir = C:\Users\lab_services_student\source\repos\LMS\LMS\
+build_property.ProjectDir = C:\Users\TrinityT\source\repos\TrinityJayd\LMS\LMS\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\lab_services_student\source\repos\LMS\LMS
+build_property.MSBuildProjectDirectory = C:\Users\TrinityT\source\repos\TrinityJayd\LMS\LMS
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/FindingCallNumbers/Index.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/FindingCallNumbers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmluZGluZ0NhbGxOdW1iZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/Home/ComingSoon.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/Home/ComingSoon.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb21pbmdTb29uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/Home/Index.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/Home/Learn.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/Home/Learn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMZWFybi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/IdentifyingAreas/Index.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/IdentifyingAreas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpZnlpbmdBcmVhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/ReplaceBooks/Index.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/ReplaceBooks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwbGFjZUJvb2tzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/Shared/Error.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/_ViewImports.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/_ViewStart.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lab_services_student/source/repos/LMS/LMS/Views/Shared/_Layout.cshtml]
+[C:/Users/TrinityT/source/repos/TrinityJayd/LMS/LMS/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-oaye5qotgs
